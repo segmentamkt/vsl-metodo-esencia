@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Método Esencia — Transforma Tu Vida Desde Adentro</title>
+<meta name="description" content="Descubre el método que miles han usado para sanar su niño interior, vencer la procrastinación y alcanzar sus metas de vida.">
+
+<script>
+const CONFIG = {
+  // ── VIDEO ──────────────────────────────────
+  // Opciones: "video/vsl.mp4" (local) o URL de Cloudflare Stream / CDN externo
+  videoSrc: "video/vsl.mp4",
+  videoPoster: "img/poster.jpg", // Imagen que se ve antes de reproducir
+
+  // ── BOTÓN DE COMPRA ────────────────────────
+  hotmartUrl: "https://pay.hotmart.com/TU_LINK_AQUI",
+
+  // ── TIMING (en segundos) ───────────────────
+  // Cuándo aparece el botón de compra principal
+  buyButtonAppearAt: 720, // 720 segundos = 12 minutos
+
+  // ── TEXTOS DEL BOTÓN FIJO (abajo) ─────────
+  // El botón cambia de texto dinámicamente según el segundo del video
+  stickyButtonStages: [
+    { from: 0,   text: "Sigue viendo el video..." },
+    { from: 180, text: "Esto es solo el comienzo..." },
+    { from: 480, text: "¿Ya sientes que esto es para ti?" },
+    { from: 660, text: "👇 Quiero el Método Esencia" },
+    { from: 720, text: "🌿 Sí, quiero transformar mi vida — $67 USD" },
+  ],
+
+  // ── MINI-HOOKS (texto flotante sobre el video) ─
+  hooks: [
+    { at: 30,  text: "🌱 Esto que viene lo cambia todo..." },
+    { at: 120, text: "💡 Presta atención a este punto" },
+    { at: 300, text: "⚡ Este fue el momento que lo cambió todo" },
+    { at: 540, text: "🔑 Aquí está la clave que nadie te enseñó" },
+    { at: 680, text: "✨ Tu transformación empieza ahora" },
+  ],
+
+  // ── CONTADOR DE URGENCIA ───────────────────
+  showUrgencyTimer: true,
+  urgencyHours: 23,
+  urgencyMinutes: 47,
+  urgencySeconds: 0,
+
+  // ── BARRA DE PROGRESO FALSA ────────────────
+  fastProgressUntil: 30, // Segundos iniciales donde va rápido
+  fastProgressFactor: 3, // Multiplicador de velocidad visual
+};
+</script>
+
+<style>
+/* ═══════════════════════════════════════
+   IMPORTS & VARIABLES (Paleta Natural / Paz)
+   ═══════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --tierra:     #3d2b1f;
+  --musgo:      #4a5e3a;
+  --salvia:     #7a9268;
+  --menta:      #a8c89a;
+  --crema:      #f5f0e8;
+  --arena:      #e8ddc8;
+  --piedra:     #b8a898;
+  --aurora:     #c8a96e;
+  --blanco:     #fdfaf5;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Lato', Arial, sans-serif;
+  --max-w: 680px;
+  --radius: 12px;
+  --radius-sm: 6px;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background-color: var(--tierra);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(122,146,104,0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(107,157,173,0.15) 0%, transparent 50%);
+  background-attachment: fixed;
+  color: var(--crema);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.page {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 16px 140px; /* Margen inferior para que la barra fija no tape nada */
+}
+
+/* ═══════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════ */
+.header { text-align: center; padding: 36px 0 28px; }
+.logo-mark { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 24px; opacity: 0.75; }
+.logo-mark svg { width: 28px; height: 28px; }
+.logo-text { font-family: var(--font-display); font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--menta); }
+.headline { font-family: var(--font-display); font-size: clamp(26px, 5vw, 38px); font-weight: 700; line-height: 1.2; color: var(--blanco); margin-bottom: 14px; }
+.headline em { font-style: italic; color: var(--aurora); }
+.subheadline { font-size: clamp(15px, 2.5vw, 17px); color: var(--menta); max-width: 520px; margin: 0 auto 6px; font-weight: 400; }
+.divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--aurora), transparent); margin: 20px auto; }
+
+/* ═══════════════════════════════════════
+   VIDEO SECTION
+   ═══════════════════════════════════════ */
+.video-section { position: relative; margin-bottom: 28px; }
+.video-wrapper {
+  position: relative;
+  background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(168,200,154,0.15);
+  aspect-ratio: 16/9;
+}
+#mainVideo { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(25,18,12,0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.4s ease;
+  z-index: 10;
+}
+.play-overlay.hidden { opacity: 0; pointer-events: none; }
+.play-btn-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(200,169,110,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  transition: transform 0.2s, background 0.2s;
+}
+.play-overlay:hover .play-btn-circle { transform: scale(1.08); background: var(--aurora); }
+.play-btn-circle svg { width: 28px; height: 28px; margin-left: 4px; }
+.play-overlay-text { font-family: var(--font-display); font-size: 16px; color: var(--crema); letter-spacing: 1px; }
+
+.hook-bubble {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-12px);
+  background: rgba(25,18,12,0.92);
+  border: 1px solid rgba(200,169,110,0.4);
+  border-radius: 40px;
+  padding: 8px 18px;
+  font-size: 14px;
+  color: var(--aurora);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.4s;
+  z-index: 20;
+  pointer-events: none;
+  font-weight: 400;
+}
+.hook-bubble.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.progress-bar-track { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; position: relative; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--salvia), var(--aurora)); border-radius: 3px; transition: width 0.3s linear; }
+
+/* ═══════════════════════════════════════
+   BODY COPY & FEATURES
+   ═══════════════════════════════════════ */
+.body-copy { text-align: center; padding: 8px 0 24px; }
+.body-copy p { font-size: 15px; color: var(--piedra); max-width: 480px; margin: 0 auto; }
+.body-copy strong { color: var(--crema); font-weight: 700; }
+
+.features { margin: 32px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 440px) { .features { grid-template-columns: 1fr; } }
+.feature-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 18px 16px; text-align: center; }
+.feature-icon { font-size: 28px; margin-bottom: 8px; }
+.feature-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--menta); margin-bottom: 6px; }
+.feature-desc { font-size: 13px; color: var(--piedra); line-height: 1.5; }
+
+/* ═══════════════════════════════════════
+   BOTÓN DE COMPRA PRINCIPAL (Revelado al tiempo X)
+   ═══════════════════════════════════════ */
+.buy-section {
+  text-align: center;
+  display: none; /* Evita interacciones accidentales antes de tiempo */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.buy-section.visible { display: block; opacity: 1; transform: translateY(0); }
+.buy-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--salvia) 0%, var(--musgo) 100%);
+  color: var(--blanco);
+  font-family: var(--font-body);
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 18px 40px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 30px rgba(74,94,58,0.45);
+  animation: pulse-glow 2.5s ease-in-out infinite;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  max-width: 480px;
+  line-height: 1.3;
+}
+.buy-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 14px 40px rgba(74,94,58,0.55); }
+.buy-btn:active { transform: scale(0.98); }
+
+@keyframes pulse-glow {
+  0%,100% { box-shadow: 0 8px 30px rgba(74,94,58,0.45), 0 0 0 0 rgba(168,200,154,0.4); }
+  50%      { box-shadow: 0 8px 30px rgba(74,94,58,0.45), 0 0 0 10px rgba(168,200,154,0); }
+}
+.buy-btn-sub { display: block; font-size: 12px; font-weight: 300; opacity: 0.8; margin-top: 4px; }
+.guarantee { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; font-size: 13px; color: var(--piedra); }
+.urgency-box { background: rgba(61,43,31,0.6); border: 1px solid rgba(200,169,110,0.2); border-radius: var(--radius-sm); padding: 12px 16px; margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--arena); }
+.countdown-display { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--aurora); font-weight: 700; letter-spacing: 1px; min-width: 80px; text-align: center; }
+
+/* ═══════════════════════════════════════
+   STICKY BOTTOM BAR (Barra Fija Inteligente)
+   ═══════════════════════════════════════ */
+.sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 12px 16px 20px;
+  background: linear-gradient(to top, rgba(25,18,12,1) 80%, rgba(25,18,12,0));
+  pointer-events: none; /* Permite clicks en el footer detrás de la barra */
+  display: flex;
+  justify-content: center;
+}
+.sticky-btn {
+  display: block;
+  width: 100%;
+  max-width: var(--max-w);
+  background: var(--salvia);
+  color: var(--blanco);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  padding: 14px 24px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  letter-spacing: 0.3px;
+  pointer-events: auto; /* Reactiva interacciones solo sobre el botón */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.sticky-btn:hover { background: var(--musgo); }
+.sticky-btn.inactive { background: rgba(255,255,255,0.07); color: var(--piedra); cursor: default; pointer-events: none; box-shadow: none; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+.mini-footer { text-align: center; padding: 24px 0 0; font-size: 12px; color: rgba(184,168,152,0.5); line-height: 1.6; }
+.mini-footer a { color: inherit; }
+
+/* ═══════════════════════════════════════
+   ANIMATIONS & RESPONSIVE
+   ═══════════════════════════════════════ */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.animate-in { animation: fadeInUp 0.7s ease both; }
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; }
+
+@media (max-width: 480px) {
+  .header { padding: 24px 0 20px; }
+  .buy-btn { font-size: 16px; padding: 16px 24px; }
+  .sticky-btn { font-size: 14px; padding: 13px 18px; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="header animate-in">
+    <div class="logo-mark">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M14 3 C14 3 22 9 22 17 C22 21.4 18.4 25 14 25 C9.6 25 6 21.4 6 17 C6 9 14 3 14 3Z" stroke="#a8c89a" stroke-width="1.5" fill="rgba(168,200,154,0.15)"/>
+        <line x1="14" y1="25" x2="14" y2="10" stroke="#a8c89a" stroke-width="1" stroke-dasharray="2 2"/>
+      </svg>
+      <span class="logo-text">Método Esencia</span>
+    </div>
+    <h1 class="headline">Libera tu <em>niño interior</em>,<br>vence la procrastinación<br>y vive con propósito</h1>
+    <div class="divider"></div>
+    <p class="subheadline delay-1 animate-in">Mira el video hasta el final — lo que descubrirás puede cambiar el rumbo de tu vida.</p>
+  </header>
+
+  <section class="video-section animate-in delay-2">
+    <div class="video-wrapper">
+      <video id="mainVideo" playsinline preload="metadata" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback">
+        <source src="video/vsl.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+      </video>
+
+      <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Reproducir video">
+        <div class="play-btn-circle">
+          <svg viewBox="0 0 28 28" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="8,4 24,14 8,24"/>
+          </svg>
+        </div>
+        <span class="play-overlay-text">Ver ahora</span>
+      </div>
+
+      <div class="hook-bubble" id="hookBubble" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+  </section>
+
+  <div class="body-copy animate-in delay-3">
+    <p>En este video descubrirás el <strong>método de 3 pasos</strong> que ha ayudado a cientos de personas a sanar sus bloqueos internos, <strong>dejar de postergar</strong> y finalmente avanzar hacia la vida que siempre han querido.</p>
+  </div>
+
+  <div class="features animate-in delay-3">
+    <div class="feature-card"><div class="feature-icon">🌱</div><div class="feature-title">Niño Interior</div><div class="feature-desc">Sana las heridas del pasado que hoy te frenan sin que lo notes</div></div>
+    <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Fin a la Procrastinación</div><div class="feature-desc">Desbloquea tu energía y actúa aunque no "sientas ganas"</div></div>
+    <div class="feature-card"><div class="feature-icon">🌿</div><div class="feature-title">Metas con Sentido</div><div class="feature-desc">Define metas que nazcan de quién eres, no de lo que otros esperan</div></div>
+    <div class="feature-card"><div class="feature-icon">🤍</div><div class="feature-title">Paz Interior</div><div class="feature-desc">Vive desde un lugar de calma, claridad y autenticidad real</div></div>
+  </div>
+
+  <div class="buy-section" id="buySection">
+    <a href="https://pay.hotmart.com/TU_LINK_AQUI" class="buy-btn" id="buyBtn" rel="noopener">
+      🌿 Sí, quiero el Método Esencia — $67 USD
+      <span class="buy-btn-sub">Acceso inmediato · Pago 100% seguro</span>
+    </a>
+
+    <div class="guarantee">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M8 1.5L2 4v4c0 3.3 2.5 6.4 6 7 3.5-.6 6-3.7 6-7V4L8 1.5z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        <path d="M5.5 8l1.8 1.8 3.2-3.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      Garantía de 7 días · Si no funciona, te devolvemos tu dinero
+    </div>
+
+    <div class="urgency-box" id="urgencyBox">
+      <span>⏳ Esta oferta vence en:</span>
+      <span class="countdown-display" id="countdown">23:47:00</span>
+    </div>
+  </div>
+
+  <footer class="mini-footer">
+    <p>© 2026 Método Esencia · <a href="#">Privacidad</a> · <a href="#">Términos</a></p>
+    <p>Este sitio no es parte de Facebook™ ni de Meta Platforms Inc.</p>
+  </footer>
+
+</div>
+
+<div class="sticky-bar">
+  <button class="sticky-btn inactive" id="stickyBtn">Sigue viendo el video...</button>
+</div>
+
+<script>
+(function() {
+  "use strict";
+
+  const video        = document.getElementById('mainVideo');
+  const playOverlay  = document.getElementById('playOverlay');
+  const hookBubble   = document.getElementById('hookBubble');
+  const progressFill = document.getElementById('progressFill');
+  const buySection   = document.getElementById('buySection');
+  const buyBtn       = document.getElementById('buyBtn');
+  const stickyBtn    = document.getElementById('stickyBtn');
+  const urgencyBox   = document.getElementById('urgencyBox');
+  const countdownEl  = document.getElementById('countdown');
+
+  // Inicializar configuraciones del Objeto CONFIG
+  video.src     = CONFIG.videoSrc;
+  video.poster  = CONFIG.videoPoster;
+  buyBtn.href   = CONFIG.hotmartUrl;
+
+  if (!CONFIG.showUrgencyTimer) urgencyBox.style.display = 'none';
+
+  let videoStarted = false;
+
+  // Forzar autoplay silencioso nativo
+  function attemptAutoplay() {
+    video.muted = true;
+    video.play().then(() => {
+      videoStarted = true;
+      playOverlay.classList.add('hidden');
+    }).catch(() => { /* El navegador exige click interactivo */ });
+  }
+  window.addEventListener('load', attemptAutoplay);
+
+  // Activar audio e iniciar video en click formal
+  function startVideoWithSound() {
+    video.muted = false;
+    video.play().then(() => {
+      videoStarted = true;
+    }).catch(() => {
+      video.muted = true;
+      video.play();
+      videoStarted = true;
+    });
+    playOverlay.classList.add('hidden');
+  }
+
+  playOverlay.addEventListener('click', startVideoWithSound);
+  playOverlay.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') startVideoWithSound(); });
+
+  // Listener redundante por si interactúan scrolleando
+  function activateSound() {
+    if (videoStarted && video.muted) { video.muted = false; }
+    document.removeEventListener('click', activateSound);
+    document.removeEventListener('touchstart', activateSound);
+  }
+  document.addEventListener('click', activateSound);
+  document.addEventListener('touchstart', activateSound, { passive: true });
+
+  // ── CONTROLES ANTI-TRAMPA (Bloqueos estrictos de navegación) ──
+  video.addEventListener('contextmenu', e => e.preventDefault());
+
+  let lastTime = 0;
+  video.addEventListener('timeupdate', () => {
+    // Si la diferencia de tiempo es mayor a 2s, el usuario intentó adelantar
+    if (Math.abs(video.currentTime - lastTime) > 2) {
+      video.currentTime = lastTime;
+    }
+    lastTime = video.currentTime;
+  });
+
+  // ── MANEJO DE BARRA DE PROGRESO SIMULADA ──
+  function updateProgressBar(currentTime, duration) {
+    if (!duration) return;
+    let visualProgress;
+
+    if (currentTime <= CONFIG.fastProgressUntil) {
+      const fastEndPercent = (CONFIG.fastProgressUntil / duration) * CONFIG.fastProgressFactor;
+      const cappedFastEnd  = Math.min(fastEndPercent, 0.35); // Tope del 35% en la aceleración inicial
+      visualProgress = (currentTime / CONFIG.fastProgressUntil) * cappedFastEnd;
+    } else {
+      const fastEndPercent = Math.min((CONFIG.fastProgressUntil / duration) * CONFIG.fastProgressFactor, 0.35);
+      const remaining      = 1 - fastEndPercent;
+      const timeRemaining  = duration - CONFIG.fastProgressUntil;
+      const elapsed        = currentTime - CONFIG.fastProgressUntil;
+      visualProgress = fastEndPercent + (elapsed / timeRemaining) * remaining;
+    }
+    progressFill.style.width = (Math.min(visualProgress, 1) * 100).toFixed(2) + '%';
+  }
+
+  // ── DESPLIEGUE DE HOOKS FLOTANTES ──
+  const shownHooks = new Set();
+  let hookTimeout = null;
+
+  function checkHooks(currentTime) {
+    CONFIG.hooks.forEach((hook, i) => {
+      if (!shownHooks.has(i) && currentTime >= hook.at && currentTime < hook.at + 1.5) {
+        shownHooks.add(i);
+        showHook(hook.text);
+      }
+    });
+  }
+
+  function showHook(text) {
+    clearTimeout(hookTimeout);
+    hookBubble.textContent = text;
+    hookBubble.classList.add('visible');
+    hookTimeout = setTimeout(() => { hookBubble.classList.remove('visible'); }, 4000);
+  }
+
+  // ── REVELACIÓN DE OFERTA COMPRA ──
+  let buyButtonShown = false;
+  function checkBuyButton(currentTime) {
+    if (!buyButtonShown && currentTime >= CONFIG.buyButtonAppearAt) {
+      buyButtonShown = true;
+      buySection.classList.add('visible');
+    }
+  }
+
+  // ── ACTUALIZACIÓN DE BOTÓN INFERIOR DINÁMICO ──
+  function updateStickyBtn(currentTime) {
+    let currentStage = CONFIG.stickyButtonStages[0];
+    for (const stage of CONFIG.stickyButtonStages) {
+      if (currentTime >= stage.from) currentStage = stage;
+    }
+
+    stickyBtn.textContent = currentStage.text;
+
+    if (currentTime >= CONFIG.buyButtonAppearAt) {
+      stickyBtn.classList.remove('inactive');
+      stickyBtn.onclick = () => window.open(CONFIG.hotmartUrl, '_blank', 'noopener');
+    } else {
+      stickyBtn.classList.add('inactive');
+      stickyBtn.onclick = null;
+    }
+  }
+
+  // Escuchador unificado para rendimiento móvil
+  video.addEventListener('timeupdate', () => {
+    const t = video.currentTime;
+    const d = video.duration;
+    updateProgressBar(t, d);
+    checkHooks(t);
+    checkBuyButton(t);
+    updateStickyBtn(t);
+  });
+
+  // ── TEMPORIZADOR DE URGENCIA PERSISTENTE (SessionStorage) ──
+  if (CONFIG.showUrgencyTimer) {
+    let endTime = parseInt(sessionStorage.getItem('esencia_timer_end') || '0');
+    if (!endTime || endTime < Date.now()) {
+      endTime = Date.now() + (CONFIG.urgencyHours * 3600000) + (CONFIG.urgencyMinutes * 60000) + (CONFIG.urgencySeconds * 1000);
+      sessionStorage.setItem('esencia_timer_end', endTime.toString());
+    }
+
+    function updateCountdown() {
+      const diff = Math.max(0, endTime - Date.now());
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      
+      countdownEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+
+      if (diff > 0) { setTimeout(updateCountdown, 1000); }
+      else { countdownEl.textContent = '00:00:00'; }
+    }
+    updateCountdown();
+  }
+})();
+</script>
+</body>
+</html>
