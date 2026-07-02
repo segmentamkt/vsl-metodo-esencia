@@ -3,150 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Método Esencia — Transforma Tu Vida Desde Adentro</title>
-<meta name="description" content="Descubre el método que miles han usado para sanar su niño interior, vencer la procrastinación y alcanzar sus metas de vida.">
+<title>Método Esencia — Recupera Tu Paz y Empieza a Vivir Lo Que Mereces</title>
+<meta name="description" content="El método que te ayuda a sanar tu niño interior, vencer la procrastinación y vivir con propósito real.">
 
 <!-- ═══════════════════════════════════════════
      CONFIGURACIÓN — Edita solo esta sección
      ═══════════════════════════════════════════ -->
 <script>
 const CONFIG = {
-  // ── VIDEO ──────────────────────────────────
-  // Mux Playback URL
   videoSrc: "https://stream.mux.com/m5HozKavbfkyx01z02YAB5m8e02x02ft6pWKirY6zhtUBl4.m3u8",
-  videoPoster: "img/poster.jpg", // Imagen que se ve antes de reproducir
-
-  // ── BOTÓN DE COMPRA ────────────────────────
+  videoPoster: "",
   hotmartUrl: "https://pay.hotmart.com/TU_LINK_AQUI",
 
-  // ── TIMING (en segundos) ───────────────────
-  // Cuándo aparece el botón de compra principal
-  buyButtonAppearAt: 720, // 12 minutos
+  // Segundos en que aparece el botón de compra principal
+  buyButtonAppearAt: 600, // 10 minutos (ajusta según tu video)
 
-  // ── TEXTOS DEL BOTÓN FIJO (abajo) ─────────
-  // El botón siempre visible cambia texto según el momento del video
+  // Textos del botón fijo de abajo según momento del video
   stickyButtonStages: [
-    { from: 0,   text: "Sigue viendo el video..." },
-    { from: 180, text: "Esto es solo el comienzo..." },
-    { from: 480, text: "¿Ya sientes que esto es para ti?" },
-    { from: 660, text: "👇 Quiero el Método Esencia" },
-    { from: 720, text: "🌿 Sí, quiero transformar mi vida — $67 USD" },
+    { from: 0,   text: "🎬 Sigue viendo — lo importante viene ahora" },
+    { from: 120, text: "👀 Presta atención a esto..." },
+    { from: 300, text: "¿Ya sientes que esto es para ti?" },
+    { from: 480, text: "👇 Quiero el Método Esencia" },
+    { from: 600, text: "🌿 Sí, quiero transformar mi vida — $67 USD" },
   ],
 
-  // ── MINI-HOOKS (texto flotante sobre el video) ─
+  // Hooks flotantes sobre el video en momentos clave
   hooks: [
-    { at: 30,  text: "🌱 Esto que viene lo cambia todo..." },
-    { at: 120, text: "💡 Presta atención a este punto" },
-    { at: 300, text: "⚡ Este fue el momento que lo cambió todo" },
-    { at: 540, text: "🔑 Aquí está la clave que nadie te enseñó" },
-    { at: 680, text: "✨ Tu transformación empieza ahora" },
+    { at: 20,  text: "🌱 Lo que sigue te va a sorprender..." },
+    { at: 90,  text: "💡 Esto nadie te lo había explicado así" },
+    { at: 240, text: "⚡ Aquí está la raíz de todo" },
+    { at: 420, text: "🔑 Esta es la clave que lo cambia todo" },
+    { at: 560, text: "✨ Tu momento de actuar está llegando" },
   ],
 
-  // ── CONTADOR DE URGENCIA ───────────────────
+  // Contador de urgencia
   showUrgencyTimer: true,
   urgencyHours: 23,
   urgencyMinutes: 47,
   urgencySeconds: 0,
 
-  // ── BARRA DE PROGRESO FALSA ────────────────
-  // Velocidad fast al inicio (segundos donde acelera)
+  // Barra de progreso falsa
   fastProgressUntil: 30,
-  // Factor de aceleración inicial (ej: 3 = avanza 3x rápido visualmente)
-  fastProgressFactor: 3,
+  fastProgressFactor: 2.5,
 };
 </script>
 
 <style>
-/* ═══════════════════════════════════════
-   IMPORTS
-   ═══════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lato:wght@300;400;700;900&display=swap');
 
-/* ═══════════════════════════════════════
-   VARIABLES — Paleta Natural / Paz
-   ═══════════════════════════════════════ */
 :root {
-  --tierra:    #3d2b1f;
-  --musgo:     #4a5e3a;
-  --salvia:    #7a9268;
-  --menta:     #a8c89a;
-  --crema:     #f5f0e8;
-  --arena:     #e8ddc8;
-  --piedra:    #b8a898;
-  --agua:      #6b9dad;
-  --aurora:    #c8a96e;
-  --blanco:    #fdfaf5;
+  --tierra:   #2a1f14;
+  --tierra2:  #3d2b1f;
+  --musgo:    #3a5230;
+  --salvia:   #5a7a48;
+  --menta:    #8fb87e;
+  --crema:    #f2ead8;
+  --arena:    #e0d4b8;
+  --piedra:   #a89880;
+  --aurora:   #c8a55a;
+  --blanco:   #fdfaf2;
+  --rojo:     #c0392b;
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body:    'Lato', Arial, sans-serif;
-  --max-w: 680px;
-  --radius: 12px;
-  --radius-sm: 6px;
+  --max-w: 660px;
+  --radius: 14px;
 }
 
-/* ═══════════════════════════════════════
-   RESET & BASE
-   ═══════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { font-size: 16px; scroll-behavior: smooth; }
+html { font-size: 16px; }
 
 body {
-  background-color: var(--tierra);
-  background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(122,146,104,0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(107,157,173,0.15) 0%, transparent 50%);
-  background-attachment: fixed;
-  color: var(--crema);
   font-family: var(--font-body);
   font-weight: 300;
   line-height: 1.7;
+  color: var(--crema);
   min-height: 100vh;
   overflow-x: hidden;
+  background-color: var(--tierra);
+  background-image:
+    /* Gradiente de luz cenital */
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(90,122,72,0.35) 0%, transparent 60%),
+    /* Viñeta oscura en bordes */
+    radial-gradient(ellipse 120% 100% at 50% 100%, rgba(20,13,8,0.7) 0%, transparent 60%),
+    /* Textura de hojas SVG inline */
+    url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='30' cy='40' rx='18' ry='28' fill='none' stroke='rgba(90,122,72,0.12)' stroke-width='1.5' transform='rotate(-30 30 40)'/%3E%3Cellipse cx='160' cy='80' rx='14' ry='22' fill='none' stroke='rgba(90,122,72,0.10)' stroke-width='1.2' transform='rotate(20 160 80)'/%3E%3Cellipse cx='80' cy='160' rx='20' ry='30' fill='none' stroke='rgba(90,122,72,0.08)' stroke-width='1' transform='rotate(-15 80 160)'/%3E%3Cellipse cx='140' cy='170' rx='12' ry='18' fill='none' stroke='rgba(90,122,72,0.09)' stroke-width='1' transform='rotate(40 140 170)'/%3E%3Cellipse cx='10' cy='130' rx='10' ry='16' fill='none' stroke='rgba(90,122,72,0.07)' stroke-width='1' transform='rotate(-50 10 130)'/%3E%3C/svg%3E");
+  background-size: auto, auto, 200px 200px;
+  background-attachment: fixed;
 }
 
-/* ═══════════════════════════════════════
-   LAYOUT
-   ═══════════════════════════════════════ */
+/* ══ LAYOUT ══ */
 .page {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 16px 120px;
+  padding: 0 16px 130px;
 }
 
-/* ═══════════════════════════════════════
-   HEADER
-   ═══════════════════════════════════════ */
+/* ══ ALERTA SUPERIOR ══ */
+.top-alert {
+  background: var(--rojo);
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* ══ HEADER ══ */
 .header {
   text-align: center;
-  padding: 36px 0 28px;
+  padding: 32px 0 24px;
 }
 
-.logo-mark {
+.logo-wrap {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
-  opacity: 0.75;
+  gap: 8px;
+  margin-bottom: 20px;
+  opacity: 0.8;
 }
 
-.logo-mark svg { width: 28px; height: 28px; }
+.logo-leaf {
+  width: 26px;
+  height: 26px;
+}
 
-.logo-text {
+.logo-name {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--menta);
 }
 
+.pre-headline {
+  display: inline-block;
+  background: rgba(200,165,90,0.15);
+  border: 1px solid rgba(200,165,90,0.3);
+  border-radius: 40px;
+  padding: 5px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--aurora);
+  margin-bottom: 16px;
+}
+
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(26px, 5vw, 38px);
+  font-size: clamp(24px, 5.5vw, 40px);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
   color: var(--blanco);
   margin-bottom: 14px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
 }
 
 .headline em {
@@ -155,34 +170,32 @@ body {
 }
 
 .subheadline {
-  font-size: clamp(15px, 2.5vw, 17px);
+  font-size: clamp(14px, 2.5vw, 17px);
   color: var(--menta);
-  max-width: 520px;
+  max-width: 500px;
   margin: 0 auto 6px;
   font-weight: 400;
 }
 
 .divider {
-  width: 60px;
+  width: 50px;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--aurora), transparent);
-  margin: 20px auto;
+  margin: 18px auto;
 }
 
-/* ═══════════════════════════════════════
-   VIDEO SECTION
-   ═══════════════════════════════════════ */
-.video-section {
-  position: relative;
-  margin-bottom: 28px;
-}
+/* ══ VIDEO ══ */
+.video-section { position: relative; margin-bottom: 0; }
 
 .video-wrapper {
   position: relative;
   background: #000;
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(168,200,154,0.15);
+  box-shadow:
+    0 0 0 1px rgba(143,184,126,0.2),
+    0 4px 6px rgba(0,0,0,0.3),
+    0 20px 60px rgba(0,0,0,0.5);
   aspect-ratio: 16/9;
 }
 
@@ -193,11 +206,11 @@ body {
   object-fit: cover;
 }
 
-/* ── Overlay de play (antes de interacción) ── */
+/* Overlay de play */
 .play-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(25,18,12,0.55);
+  background: rgba(20,13,8,0.6);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -206,98 +219,137 @@ body {
   transition: opacity 0.4s;
   z-index: 10;
 }
-
 .play-overlay.hidden { opacity: 0; pointer-events: none; }
 
-.play-btn-circle {
-  width: 72px;
-  height: 72px;
+.play-circle {
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
-  background: rgba(200,169,110,0.9);
+  background: rgba(200,165,90,0.92);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 0 0 10px rgba(200,165,90,0.15);
 }
-
-.play-overlay:hover .play-btn-circle {
+.play-overlay:hover .play-circle {
   transform: scale(1.08);
   background: var(--aurora);
 }
-
-.play-btn-circle svg { width: 28px; height: 28px; margin-left: 4px; }
-
-.play-overlay-text {
+.play-circle svg { width: 28px; height: 28px; margin-left: 5px; }
+.play-label {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 15px;
   color: var(--crema);
   letter-spacing: 1px;
 }
 
-/* ── Hook flotante sobre el video ── */
+/* Hook flotante */
 .hook-bubble {
   position: absolute;
-  top: 16px;
+  top: 14px;
   left: 50%;
-  transform: translateX(-50%) translateY(-12px);
-  background: rgba(25,18,12,0.88);
-  border: 1px solid rgba(200,169,110,0.4);
+  transform: translateX(-50%) translateY(-10px);
+  background: rgba(20,13,8,0.9);
+  border: 1px solid rgba(200,165,90,0.45);
   border-radius: 40px;
-  padding: 8px 18px;
-  font-size: 14px;
+  padding: 7px 18px;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--aurora);
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.4s, transform 0.4s;
   z-index: 20;
   pointer-events: none;
-  font-weight: 400;
 }
-
 .hook-bubble.visible {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
-/* ── Barra de progreso falsa ── */
-.progress-bar-track {
+/* ══ BARRA DE PROGRESO FALSA ══ */
+.progress-track {
   width: 100%;
-  height: 3px;
-  background: rgba(255,255,255,0.1);
+  height: 4px;
+  background: rgba(255,255,255,0.08);
   border-radius: 0 0 var(--radius) var(--radius);
   overflow: hidden;
-  position: relative;
+  margin-bottom: 8px;
 }
-
-.progress-bar-fill {
+.progress-fill {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, var(--salvia), var(--aurora));
-  border-radius: 3px;
-  transition: width 0.8s ease-out;
+  border-radius: 4px;
+  transition: width 1s linear;
 }
 
-/* ═══════════════════════════════════════
-   BODY COPY (debajo del video)
-   ═══════════════════════════════════════ */
+/* Tiempo del video */
+.video-time {
+  text-align: right;
+  font-size: 11px;
+  color: var(--piedra);
+  margin-bottom: 20px;
+  padding-right: 2px;
+}
+
+/* ══ NO CERRAR ALERTA ══ */
+.dont-close {
+  background: rgba(192,57,43,0.12);
+  border: 1px solid rgba(192,57,43,0.3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #e8a090;
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+}
+
+/* ══ COPY DEBAJO DEL VIDEO ══ */
 .body-copy {
   text-align: center;
-  padding: 8px 0 24px;
+  padding: 4px 0 20px;
 }
-
 .body-copy p {
   font-size: 15px;
   color: var(--piedra);
-  max-width: 480px;
+  max-width: 500px;
   margin: 0 auto;
+  line-height: 1.7;
 }
-
 .body-copy strong { color: var(--crema); font-weight: 700; }
 
-/* ═══════════════════════════════════════
-   BOTÓN DE COMPRA PRINCIPAL (aparece al tiempo)
-   ═══════════════════════════════════════ */
+/* ══ FEATURES ══ */
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 4px 0 28px;
+}
+@media (max-width: 420px) { .features { grid-template-columns: 1fr; } }
+
+.feature-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(143,184,126,0.12);
+  border-radius: var(--radius);
+  padding: 16px 14px;
+  text-align: center;
+}
+.feature-icon { font-size: 26px; margin-bottom: 6px; }
+.feature-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--menta);
+  margin-bottom: 5px;
+}
+.feature-desc { font-size: 12px; color: var(--piedra); line-height: 1.5; }
+
+/* ══ BOTÓN COMPRA PRINCIPAL ══ */
 .buy-section {
   text-align: center;
   opacity: 0;
@@ -305,7 +357,6 @@ body {
   transition: opacity 0.8s ease, transform 0.8s ease;
   pointer-events: none;
 }
-
 .buy-section.visible {
   opacity: 1;
   transform: translateY(0);
@@ -313,367 +364,318 @@ body {
 }
 
 .buy-btn {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--salvia) 0%, var(--musgo) 100%);
-  color: var(--blanco);
+  display: block;
+  background: linear-gradient(135deg, #4a7a38 0%, #2d5220 100%);
+  color: #fff;
   font-family: var(--font-body);
-  font-size: clamp(16px, 3vw, 20px);
-  font-weight: 700;
+  font-size: clamp(15px, 3vw, 20px);
+  font-weight: 900;
   text-decoration: none;
-  padding: 18px 40px;
+  padding: 20px 32px;
   border-radius: 60px;
   border: none;
   cursor: pointer;
-  letter-spacing: 0.5px;
-  box-shadow: 0 8px 30px rgba(74,94,58,0.45), 0 0 0 0 rgba(168,200,154,0.4);
-  animation: pulse-glow 2.5s ease-in-out infinite;
-  transition: transform 0.2s, box-shadow 0.2s;
   width: 100%;
-  max-width: 480px;
+  max-width: 500px;
   line-height: 1.3;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 30px rgba(42,82,32,0.5), 0 0 0 3px rgba(143,184,126,0.2);
+  animation: pulse-buy 2.5s ease-in-out infinite;
+  transition: transform 0.2s;
 }
-
-.buy-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 14px 40px rgba(74,94,58,0.55);
-}
-
+.buy-btn:hover { transform: translateY(-2px) scale(1.02); }
 .buy-btn:active { transform: scale(0.98); }
-
-@keyframes pulse-glow {
-  0%,100% { box-shadow: 0 8px 30px rgba(74,94,58,0.45), 0 0 0 0 rgba(168,200,154,0.4); }
-  50%      { box-shadow: 0 8px 30px rgba(74,94,58,0.45), 0 0 0 10px rgba(168,200,154,0); }
-}
-
 .buy-btn-sub {
   display: block;
-  font-size: 12px;
-  font-weight: 300;
-  opacity: 0.8;
-  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 5px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+@keyframes pulse-buy {
+  0%,100% { box-shadow: 0 8px 30px rgba(42,82,32,0.5), 0 0 0 3px rgba(143,184,126,0.2); }
+  50%      { box-shadow: 0 8px 30px rgba(42,82,32,0.5), 0 0 0 8px rgba(143,184,126,0); }
 }
 
 .guarantee {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 14px;
-  font-size: 13px;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 12px;
   color: var(--piedra);
 }
 
-.guarantee svg { flex-shrink: 0; opacity: 0.7; }
-
-/* ── Urgency countdown ── */
+/* Urgency box */
 .urgency-box {
-  background: rgba(61,43,31,0.6);
-  border: 1px solid rgba(200,169,110,0.2);
-  border-radius: var(--radius-sm);
+  background: rgba(42,31,20,0.7);
+  border: 1px solid rgba(200,165,90,0.2);
+  border-radius: 8px;
   padding: 12px 16px;
   margin-top: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--arena);
+  flex-wrap: wrap;
 }
-
-.countdown-display {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
+.countdown {
+  font-family: var(--font-display);
+  font-size: 22px;
   color: var(--aurora);
   font-weight: 700;
-  letter-spacing: 1px;
-  min-width: 80px;
+  letter-spacing: 2px;
+}
+
+/* ══ MINI FOOTER ══ */
+.mini-footer {
   text-align: center;
+  padding: 16px 0 0;
+  font-size: 11px;
+  color: rgba(168,152,128,0.45);
+  line-height: 1.7;
 }
+.mini-footer a { color: inherit; }
 
-/* ═══════════════════════════════════════
-   FEATURES / PROOF (opcional, siempre visible)
-   ═══════════════════════════════════════ */
-.features {
-  margin: 32px 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-@media (max-width: 440px) { .features { grid-template-columns: 1fr; } }
-
-.feature-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius);
-  padding: 18px 16px;
-  text-align: center;
-}
-
-.feature-icon { font-size: 28px; margin-bottom: 8px; }
-
-.feature-title {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--menta);
-  margin-bottom: 6px;
-}
-
-.feature-desc {
-  font-size: 13px;
-  color: var(--piedra);
-  line-height: 1.5;
-}
-
-/* ═══════════════════════════════════════
-   STICKY BOTTOM BAR
-   ═══════════════════════════════════════ */
+/* ══ STICKY BAR ══ */
 .sticky-bar {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 12px 16px 14px;
-  background: rgba(25,18,12,0.96);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(168,200,154,0.15);
+  padding: 10px 16px 12px;
+  background: rgba(18,12,7,0.97);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(143,184,126,0.12);
   display: flex;
   justify-content: center;
 }
-
 .sticky-btn {
   display: block;
   width: 100%;
   max-width: var(--max-w);
-  background: var(--salvia);
-  color: var(--blanco);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  text-decoration: none;
   text-align: center;
   padding: 14px 24px;
   border-radius: 60px;
   border: none;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
 }
-
-.sticky-btn:hover { background: var(--musgo); }
-.sticky-btn:active { transform: scale(0.98); }
 .sticky-btn.inactive {
-  background: rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.06);
   color: var(--piedra);
-  cursor: default;
   pointer-events: none;
+  cursor: default;
 }
-
-/* ═══════════════════════════════════════
-   FOOTER MÍNIMO
-   ═══════════════════════════════════════ */
-.mini-footer {
-  text-align: center;
-  padding: 12px 0 0;
-  font-size: 12px;
-  color: rgba(184,168,152,0.5);
-  line-height: 1.6;
+.sticky-btn.active {
+  background: linear-gradient(135deg, #4a7a38, #2d5220);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(42,82,32,0.4);
+  text-transform: uppercase;
 }
+.sticky-btn.active:hover { transform: scale(1.01); }
 
-.mini-footer a { color: inherit; }
-
-/* ═══════════════════════════════════════
-   POPUP DE URGENCIA
-   ═══════════════════════════════════════ */
-.exit-popup {
+/* ══ POPUP DE URGENCIA (al pausar) ══ */
+.pause-popup {
   position: fixed;
   inset: 0;
-  background: rgba(15,10,5,0.85);
-  backdrop-filter: blur(6px);
-  z-index: 200;
+  background: rgba(10,6,3,0.88);
+  backdrop-filter: blur(8px);
+  z-index: 300;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.3s;
 }
-
-.exit-popup.visible {
+.pause-popup.visible {
   opacity: 1;
   pointer-events: auto;
 }
-
-.exit-popup-box {
-  background: var(--tierra);
-  border: 1px solid rgba(200,169,110,0.3);
+.popup-box {
+  background: linear-gradient(160deg, #2a1f14, #1a1208);
+  border: 1px solid rgba(200,165,90,0.35);
   border-radius: 20px;
-  padding: 36px 28px;
-  max-width: 420px;
+  padding: 36px 28px 28px;
+  max-width: 400px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-  transform: translateY(16px);
-  transition: transform 0.35s ease;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(200,165,90,0.1);
+  transform: scale(0.95);
+  transition: transform 0.3s;
 }
+.pause-popup.visible .popup-box { transform: scale(1); }
 
-.exit-popup.visible .exit-popup-box {
-  transform: translateY(0);
+.popup-badge {
+  display: inline-block;
+  background: rgba(192,57,43,0.15);
+  border: 1px solid rgba(192,57,43,0.4);
+  color: #e8a090;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 40px;
+  margin-bottom: 16px;
 }
-
-.exit-popup-icon {
-  font-size: 40px;
-  margin-bottom: 12px;
-}
-
-.exit-popup-title {
+.popup-title {
   font-family: var(--font-display);
-  font-size: clamp(20px, 4vw, 26px);
-  color: var(--aurora);
-  margin-bottom: 14px;
+  font-size: clamp(20px, 5vw, 28px);
+  color: var(--blanco);
+  margin-bottom: 12px;
   line-height: 1.2;
 }
-
-.exit-popup-text {
-  font-size: 15px;
+.popup-title span { color: var(--aurora); }
+.popup-body {
+  font-size: 14px;
   color: var(--piedra);
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 24px;
 }
-
-.exit-popup-text strong { color: var(--crema); }
-
-.exit-popup-btn {
+.popup-body strong { color: var(--crema); }
+.popup-buy {
   display: block;
-  background: linear-gradient(135deg, var(--salvia), var(--musgo));
-  color: var(--blanco);
+  background: linear-gradient(135deg, #4a7a38, #2d5220);
+  color: #fff;
   font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 900;
   text-decoration: none;
   padding: 16px 24px;
   border-radius: 60px;
-  margin-bottom: 14px;
-  animation: pulse-glow 2.5s ease-in-out infinite;
-  transition: transform 0.2s;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  animation: pulse-buy 2.5s ease-in-out infinite;
 }
-
-.exit-popup-btn:hover { transform: scale(1.02); }
-
-.exit-popup-skip {
+.popup-resume {
   background: none;
   border: none;
-  color: rgba(184,168,152,0.5);
+  color: rgba(168,152,128,0.45);
   font-size: 12px;
-  cursor: pointer;
   font-family: var(--font-body);
-  padding: 4px;
+  cursor: pointer;
+  padding: 6px;
   transition: color 0.2s;
+  width: 100%;
 }
+.popup-resume:hover { color: var(--piedra); }
 
-.exit-popup-skip:hover { color: var(--piedra); }
-
-/* ═══════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════ */
-@keyframes fadeInUp {
+/* ══ ANIMATIONS ══ */
+@keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+.anim { animation: fadeUp 0.7s ease both; }
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.25s; }
+.d3 { animation-delay: 0.4s; }
 
-.animate-in { animation: fadeInUp 0.7s ease both; }
-.delay-1 { animation-delay: 0.15s; }
-.delay-2 { animation-delay: 0.3s; }
-.delay-3 { animation-delay: 0.45s; }
-
-/* ═══════════════════════════════════════
-   MOBILE FINE-TUNING
-   ═══════════════════════════════════════ */
 @media (max-width: 480px) {
-  .header { padding: 24px 0 20px; }
-  .buy-btn { font-size: 16px; padding: 16px 24px; }
-  .sticky-btn { font-size: 14px; padding: 13px 18px; }
+  .buy-btn { font-size: 14px; padding: 17px 20px; }
+  .sticky-btn { font-size: 13px; }
+  .popup-box { padding: 28px 20px 22px; }
 }
 </style>
 </head>
 
 <body>
+
+<!-- Alerta roja superior -->
+<div class="top-alert">
+  ⚠️ NO CIERRES ESTA PÁGINA — Puedes no volver a encontrar esta oferta
+</div>
+
 <div class="page">
 
-  <!-- ═══ HEADER ═══ -->
-  <header class="header animate-in">
-    <div class="logo-mark">
-      <!-- Hoja SVG como logo -->
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M14 3 C14 3 22 9 22 17 C22 21.4 18.4 25 14 25 C9.6 25 6 21.4 6 17 C6 9 14 3 14 3Z" stroke="#a8c89a" stroke-width="1.5" fill="rgba(168,200,154,0.15)"/>
-        <line x1="14" y1="25" x2="14" y2="10" stroke="#a8c89a" stroke-width="1" stroke-dasharray="2 2"/>
+  <!-- HEADER -->
+  <header class="header anim">
+    <div class="logo-wrap">
+      <svg class="logo-leaf" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 2 C13 2 21 8 21 16 C21 20.4 17.4 24 13 24 C8.6 24 5 20.4 5 16 C5 8 13 2 13 2Z"
+              stroke="#8fb87e" stroke-width="1.4" fill="rgba(143,184,126,0.1)"/>
+        <line x1="13" y1="24" x2="13" y2="9" stroke="#8fb87e" stroke-width="1" stroke-dasharray="2 2"/>
       </svg>
-      <span class="logo-text">Método Esencia</span>
+      <span class="logo-name">Método Esencia</span>
     </div>
 
+    <div class="pre-headline">Solo disponible por tiempo limitado</div>
+
     <h1 class="headline">
-      Libera tu <em>niño interior</em>,<br>
-      vence la procrastinación<br>
-      y vive con propósito
+      Deja de vivir en <em>piloto automático</em><br>
+      y empieza a ser quien<br>
+      siempre quisiste ser
     </h1>
 
     <div class="divider"></div>
 
-    <p class="subheadline delay-1 animate-in">
-      Mira el video hasta el final — lo que descubrirás puede cambiar el rumbo de tu vida.
+    <p class="subheadline d2 anim">
+      Mira este video hasta el final — lo que descubrirás puede cambiar el rumbo de tu vida hoy mismo.
     </p>
   </header>
 
-  <!-- ═══ VIDEO ═══ -->
-  <section class="video-section animate-in delay-2">
-    <div class="video-wrapper">
+  <!-- VIDEO -->
+  <section class="video-section d3 anim">
 
-      <!-- Video nativo sin controles -->
+    <!-- Alerta "no cerrar" sobre el video -->
+    <div class="dont-close">
+      🔴 NO CIERRES ESTA PÁGINA — La oferta desaparece cuando termines de ver
+    </div>
+
+    <div class="video-wrapper">
       <video
         id="mainVideo"
         playsinline
-        preload="metadata"
-        poster=""
+        preload="auto"
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplayback"
-      >
-        <!-- Cambia el src por la URL de tu video -->
-        <source src="video/vsl.mp4" type="video/mp4">
-        Tu navegador no soporta video HTML5.
-      </video>
+      ></video>
 
-      <!-- Overlay de play (antes de que el usuario interactúe) -->
+      <!-- Play overlay -->
       <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Reproducir video">
-        <div class="play-btn-circle">
-          <svg viewBox="0 0 28 28" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="8,4 24,14 8,24"/>
-          </svg>
+        <div class="play-circle">
+          <svg viewBox="0 0 28 28" fill="white"><polygon points="7,4 23,14 7,24"/></svg>
         </div>
-        <span class="play-overlay-text">Ver ahora</span>
+        <span class="play-label">Toca para ver</span>
       </div>
 
       <!-- Hook flotante -->
-      <div class="hook-bubble" id="hookBubble" role="status" aria-live="polite"></div>
+      <div class="hook-bubble" id="hookBubble" aria-live="polite"></div>
     </div>
 
     <!-- Barra de progreso falsa -->
-    <div class="progress-bar-track">
-      <div class="progress-bar-fill" id="progressFill"></div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
     </div>
+    <div class="video-time" id="videoTime">0:00</div>
+
   </section>
 
-  <!-- ═══ COPY DEBAJO DEL VIDEO ═══ -->
-  <div class="body-copy animate-in delay-3">
+  <!-- COPY -->
+  <div class="body-copy">
     <p>
-      En este video descubrirás el <strong>método de 3 pasos</strong> que ha ayudado a cientos de personas a sanar sus bloqueos internos, <strong>dejar de postergar</strong> y finalmente avanzar hacia la vida que siempre han querido.
+      En este video descubrirás el <strong>método de 3 pasos</strong> que ha ayudado a cientos de personas a sanar sus bloqueos internos, <strong>dejar de postergar</strong> y finalmente vivir la vida que siempre han querido — sin necesitar más disciplina ni fuerza de voluntad.
     </p>
   </div>
 
-  <!-- ═══ FEATURES ═══ -->
-  <div class="features animate-in delay-3">
+  <!-- FEATURES -->
+  <div class="features">
     <div class="feature-card">
       <div class="feature-icon">🌱</div>
       <div class="feature-title">Niño Interior</div>
@@ -681,125 +683,125 @@ body {
     </div>
     <div class="feature-card">
       <div class="feature-icon">⚡</div>
-      <div class="feature-title">Fin a la Procrastinación</div>
-      <div class="feature-desc">Desbloquea tu energía y actúa aunque no "sientas ganas"</div>
+      <div class="feature-title">Sin Procrastinación</div>
+      <div class="feature-desc">Actúa desde tu esencia, no desde el miedo o la obligación</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🌿</div>
-      <div class="feature-title">Metas con Sentido</div>
+      <div class="feature-title">Metas Reales</div>
       <div class="feature-desc">Define metas que nazcan de quién eres, no de lo que otros esperan</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🤍</div>
       <div class="feature-title">Paz Interior</div>
-      <div class="feature-desc">Vive desde un lugar de calma, claridad y autenticidad real</div>
+      <div class="feature-desc">Vive desde calma, claridad y autenticidad real — no desde el caos</div>
     </div>
   </div>
 
-  <!-- ═══ BOTÓN DE COMPRA PRINCIPAL (oculto hasta X minutos) ═══ -->
+  <!-- BOTÓN COMPRA (aparece en X minutos) -->
   <div class="buy-section" id="buySection">
-
     <a href="#" class="buy-btn" id="buyBtn" rel="noopener">
       🌿 Sí, quiero el Método Esencia — $67 USD
-      <span class="buy-btn-sub">Acceso inmediato · Pago 100% seguro</span>
+      <span class="buy-btn-sub">Acceso inmediato · Garantía de 7 días · Pago 100% seguro</span>
     </a>
-
     <div class="guarantee">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M8 1.5L2 4v4c0 3.3 2.5 6.4 6 7 3.5-.6 6-3.7 6-7V4L8 1.5z" stroke="currentColor" stroke-width="1.2" fill="none"/>
-        <path d="M5.5 8l1.8 1.8 3.2-3.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-      Garantía de 7 días · Si no funciona, te devolvemos tu dinero
+      🛡️ Si en 7 días no ves resultados, te devolvemos tu dinero sin preguntas
     </div>
-
-    <!-- Contador de urgencia -->
     <div class="urgency-box" id="urgencyBox">
-      <span>⏳ Esta oferta vence en:</span>
-      <span class="countdown-display" id="countdown">23:47:00</span>
+      <span>⏳ Esta oferta especial vence en:</span>
+      <span class="countdown" id="countdown">23:47:00</span>
     </div>
-
   </div>
 
-  <!-- ═══ MINI FOOTER ═══ -->
   <div class="mini-footer">
     <p>© 2025 Método Esencia · <a href="#">Privacidad</a> · <a href="#">Términos</a></p>
-    <p>Este sitio no es parte de Facebook™ ni de Meta Platforms Inc.</p>
+    <p>Este sitio no está afiliado a Facebook™ ni a Meta Platforms Inc.</p>
   </div>
 
 </div><!-- /page -->
 
-<!-- ═══ POPUP DE URGENCIA ═══ -->
-<div class="exit-popup" id="exitPopup" role="dialog" aria-modal="true">
-  <div class="exit-popup-box">
-    <div class="exit-popup-icon">⏳</div>
-    <h2 class="exit-popup-title">¡Espera! Esta oferta es solo por hoy</h2>
-    <p class="exit-popup-text">
-      Si cierras ahora, perderás el precio especial de <strong>$67 USD</strong>.<br>
-      El curso sube de precio esta noche a medianoche.
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <button class="sticky-btn inactive" id="stickyBtn">
+    🎬 Sigue viendo el video...
+  </button>
+</div>
+
+<!-- POPUP DE PAUSA -->
+<div class="pause-popup" id="pausePopup" role="dialog" aria-modal="true">
+  <div class="popup-box">
+    <div class="popup-badge">⏳ Oferta válida solo por hoy</div>
+    <h2 class="popup-title">
+      ¿Ya decidiste que esto<br>
+      <span>es para ti?</span>
+    </h2>
+    <p class="popup-body">
+      <strong>No pausaste el video por accidente.</strong><br>
+      Algo en ti sabe que esto es lo que necesitas.<br><br>
+      El precio de <strong>$67 USD</strong> es solo por hoy.<br>
+      Esta noche sube — y no habrá segunda oportunidad.
     </p>
-    <a href="#" class="exit-popup-btn" id="popupBuy">
-      🌿 Sí, quiero el Método Esencia ahora
+    <a href="#" class="popup-buy" id="popupBuy" rel="noopener">
+      🌿 Sí, quiero transformar mi vida ahora
     </a>
-    <button class="exit-popup-skip" id="popupClose">
-      No, prefiero seguir pagando más después →
+    <button class="popup-resume" id="popupResume">
+      No, prefiero seguir viendo primero →
     </button>
   </div>
 </div>
 
-<!-- ═══ STICKY BAR ═══ -->
-<div class="sticky-bar">
-  <button class="sticky-btn inactive" id="stickyBtn">
-    Sigue viendo el video...
-  </button>
-</div>
 
-
-<!-- ═══════════════════════════════════════
+<!-- ════════════════════════════════════
      JAVASCRIPT
-     ═══════════════════════════════════════ -->
+     ════════════════════════════════════ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.7/hls.min.js"></script>
 <script>
-(function() {
+(function () {
   "use strict";
 
-  // ── Elementos del DOM ──
   const video        = document.getElementById('mainVideo');
   const playOverlay  = document.getElementById('playOverlay');
   const hookBubble   = document.getElementById('hookBubble');
   const progressFill = document.getElementById('progressFill');
+  const videoTime    = document.getElementById('videoTime');
   const buySection   = document.getElementById('buySection');
   const buyBtn       = document.getElementById('buyBtn');
   const stickyBtn    = document.getElementById('stickyBtn');
   const urgencyBox   = document.getElementById('urgencyBox');
   const countdownEl  = document.getElementById('countdown');
+  const pausePopup   = document.getElementById('pausePopup');
+  const popupBuy     = document.getElementById('popupBuy');
+  const popupResume  = document.getElementById('popupResume');
 
-  // ── Aplicar configuración ──
-  video.poster  = CONFIG.videoPoster;
-  buyBtn.href   = CONFIG.hotmartUrl;
-
+  // Aplicar config
+  buyBtn.href    = CONFIG.hotmartUrl;
+  popupBuy.href  = CONFIG.hotmartUrl;
   if (!CONFIG.showUrgencyTimer) urgencyBox.style.display = 'none';
 
-  // ─────────────────────────────────────────
-  // HLS.JS — compatibilidad con todos los navegadores
-  // ─────────────────────────────────────────
+  // ── HLS init ──
   function initHLS() {
+    if (typeof Hls === 'undefined') {
+      video.src = CONFIG.videoSrc; return;
+    }
     if (Hls.isSupported()) {
-      const hls = new Hls({ startLevel: -1, autoStartLoad: true });
+      const hls = new Hls({
+        startLevel: -1,
+        autoStartLoad: true,
+        maxBufferLength: 30,
+        maxMaxBufferLength: 60,
+      });
       hls.loadSource(CONFIG.videoSrc);
       hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        attemptAutoplay();
+      });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      // Safari nativo soporta HLS directamente
       video.src = CONFIG.videoSrc;
-    } else {
-      console.warn('HLS no soportado en este navegador');
+      attemptAutoplay();
     }
   }
 
-  initHLS();
-
-  // ─────────────────────────────────────────
-  // AUTOPLAY (silencioso) + manejo del overlay
-  // ─────────────────────────────────────────
+  // ── Autoplay ──
   let videoStarted = false;
 
   function attemptAutoplay() {
@@ -807,239 +809,193 @@ body {
     video.play().then(() => {
       videoStarted = true;
       playOverlay.classList.add('hidden');
-    }).catch(() => {
-      // Autoplay bloqueado → mostramos overlay para que el usuario haga clic
-    });
+    }).catch(() => { /* mostrar overlay */ });
   }
 
-  // Intentar autoplay al cargar
-  window.addEventListener('load', attemptAutoplay);
-
-  // Clic en el overlay → activar con sonido
-  function startVideoWithSound() {
+  function startWithSound() {
+    video.muted = false;
     if (!videoStarted) {
-      video.muted = false;
       video.play().then(() => {
         videoStarted = true;
+        playOverlay.classList.add('hidden');
       }).catch(() => {
         video.muted = true;
-        video.play();
+        video.play().catch(() => {});
         videoStarted = true;
+        playOverlay.classList.add('hidden');
       });
     } else {
       video.muted = false;
+      playOverlay.classList.add('hidden');
     }
-    playOverlay.classList.add('hidden');
   }
 
-  playOverlay.addEventListener('click', startVideoWithSound);
-  playOverlay.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') startVideoWithSound(); });
+  playOverlay.addEventListener('click', startWithSound);
+  playOverlay.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') startWithSound();
+  });
 
-  // Activar sonido en cualquier interacción del usuario (scroll, toque)
+  // Activar sonido en primer scroll/toque (autoplay fue muted)
   function activateSound() {
-    if (videoStarted && video.muted) {
-      video.muted = false;
-    }
+    if (videoStarted && video.muted) video.muted = false;
     document.removeEventListener('click', activateSound);
     document.removeEventListener('touchstart', activateSound);
     document.removeEventListener('scroll', activateSound);
   }
-  document.addEventListener('click',      activateSound);
+  document.addEventListener('click', activateSound);
   document.addEventListener('touchstart', activateSound, { passive: true });
-  document.addEventListener('scroll',     activateSound, { passive: true });
+  document.addEventListener('scroll', activateSound, { passive: true });
 
-  // ─────────────────────────────────────────
-  // BLOQUEAR CONTROLES (clic derecho / teclas)
-  // ─────────────────────────────────────────
+  // ── Bloquear controles ──
   video.addEventListener('contextmenu', e => e.preventDefault());
-
   document.addEventListener('keydown', e => {
-    const keys = [' ', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'k', 'j', 'l', 'f', 'm'];
-    if (keys.includes(e.key) && document.activeElement === video) {
-      e.preventDefault();
-      e.stopPropagation();
+    const blocked = [' ','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','k','j','l','f','m'];
+    if (blocked.includes(e.key) && document.activeElement === video) {
+      e.preventDefault(); e.stopPropagation();
     }
   });
 
-  // ── Detectar si la pausa es del usuario o del buffer ──
+  // ── Popup al pausar (solo si el usuario pausó, no buffering) ──
   let isBuffering = false;
+  let popupVisible = false;
 
-  video.addEventListener('waiting', () => { isBuffering = true; });
-  video.addEventListener('playing', () => { isBuffering = false; });
-  video.addEventListener('canplay', () => { isBuffering = false; });
+  video.addEventListener('waiting',  () => { isBuffering = true; });
+  video.addEventListener('playing',  () => { isBuffering = false; });
+  video.addEventListener('canplay',  () => { isBuffering = false; });
 
-  // Solo forzar reanudación si el usuario pausó (no si es buffering)
   video.addEventListener('pause', () => {
-    if (videoStarted && !isBuffering && !video.ended) {
-      // Mostrar popup de urgencia
-      showExitPopup();
-      // Reanudar después de 800ms
-      setTimeout(() => {
-        if (video.paused && !video.ended) video.play().catch(() => {});
-      }, 800);
-    }
+    // Ignorar si: no ha iniciado, está buffering, terminó, o popup ya visible
+    if (!videoStarted || isBuffering || video.ended || popupVisible) return;
+    // Solo mostrar popup si fue pausa real del usuario
+    showPausePopup();
   });
 
-  // Bloquear seeking — solo si el salto es mayor a 3 segundos
-  let lastTime = 0;
-  let seekBlocked = false;
-  video.addEventListener('timeupdate', () => {
-    if (!seekBlocked) {
-      const diff = video.currentTime - lastTime;
-      // Salto hacia adelante > 3s = bloquear. Salto hacia atrás = bloquear.
-      if (diff > 3 || diff < -0.5) {
-        seekBlocked = true;
-        video.currentTime = lastTime;
-        setTimeout(() => { seekBlocked = false; }, 500);
-      } else {
-        lastTime = video.currentTime;
-      }
-    }
-  });
-
-  // ─────────────────────────────────────────
-  // POPUP DE URGENCIA (al pausar o salir)
-  // ─────────────────────────────────────────
-  const popup = document.getElementById('exitPopup');
-  const popupClose = document.getElementById('popupClose');
-  const popupBuy = document.getElementById('popupBuy');
-
-  function showExitPopup() {
-    if (popup) popup.classList.add('visible');
+  function showPausePopup() {
+    popupVisible = true;
+    pausePopup.classList.add('visible');
   }
 
-  function hideExitPopup() {
-    if (popup) popup.classList.remove('visible');
+  function hidePausePopup() {
+    popupVisible = false;
+    pausePopup.classList.remove('visible');
     // Reanudar video
-    if (video.paused && !video.ended) video.play().catch(() => {});
+    if (video.paused && !video.ended) {
+      video.play().catch(() => {});
+    }
   }
 
-  if (popupClose) popupClose.addEventListener('click', hideExitPopup);
-  if (popupBuy)   popupBuy.addEventListener('click', () => { window.open(CONFIG.hotmartUrl, '_blank', 'noopener'); });
-
-  // También mostrar popup si intenta cerrar/salir de la página
-  window.addEventListener('beforeunload', (e) => {
-    if (videoStarted && !video.ended) {
-      e.preventDefault();
-      e.returnValue = '';
-    }
+  popupResume.addEventListener('click', hidePausePopup);
+  // Clic en el botón de compra del popup → abrir Hotmart
+  popupBuy.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open(CONFIG.hotmartUrl, '_blank', 'noopener');
   });
 
-  // ─────────────────────────────────────────
-  // BARRA DE PROGRESO FALSA
-  // ─────────────────────────────────────────
-  function updateProgressBar(currentTime, duration) {
-    if (!duration) return;
+  // ── Bloquear seeking ──
+  let lastTime = 0;
+  let blockSeek = false;
 
-    let visualProgress;
+  // ── Barra de progreso falsa + hooks + botón ──
+  video.addEventListener('timeupdate', () => {
+    const t = video.currentTime;
+    const d = video.duration || 1;
 
-    if (currentTime <= CONFIG.fastProgressUntil) {
-      // Fase rápida: avanza CONFIG.fastProgressFactor veces más rápido visualmente
-      const fastEndPercent = (CONFIG.fastProgressUntil / duration) * CONFIG.fastProgressFactor;
-      const cappedFastEnd  = Math.min(fastEndPercent, 0.35); // nunca pasa del 35% en la fase rápida
-      visualProgress = (currentTime / CONFIG.fastProgressUntil) * cappedFastEnd;
-    } else {
-      // Fase normal: distribuye el resto del progreso de forma lineal
-      const fastEndPercent = Math.min((CONFIG.fastProgressUntil / duration) * CONFIG.fastProgressFactor, 0.35);
-      const remaining      = 1 - fastEndPercent;
-      const timeRemaining  = duration - CONFIG.fastProgressUntil;
-      const elapsed        = currentTime - CONFIG.fastProgressUntil;
-      visualProgress = fastEndPercent + (elapsed / timeRemaining) * remaining;
+    // Anti-seek
+    if (!blockSeek) {
+      const diff = t - lastTime;
+      if (diff > 3 || diff < -0.5) {
+        blockSeek = true;
+        video.currentTime = lastTime;
+        setTimeout(() => { blockSeek = false; }, 500);
+        return;
+      }
+      lastTime = t;
     }
 
-    progressFill.style.width = (Math.min(visualProgress, 1) * 100).toFixed(2) + '%';
+    // Tiempo visible
+    const mins = Math.floor(t / 60);
+    const secs = Math.floor(t % 60);
+    if (videoTime) videoTime.textContent = `${mins}:${secs.toString().padStart(2,'0')}`;
+
+    // Progreso falso
+    updateProgress(t, d);
+
+    // Hooks
+    checkHooks(t);
+
+    // Botón compra
+    if (!buyBtnShown && t >= CONFIG.buyButtonAppearAt) {
+      buyBtnShown = true;
+      buySection.classList.add('visible');
+    }
+
+    // Sticky btn
+    updateStickyBtn(t);
+  });
+
+  // ── Progreso falso ──
+  function updateProgress(t, d) {
+    let pct;
+    const fast = CONFIG.fastProgressUntil;
+    const factor = CONFIG.fastProgressFactor;
+    if (t <= fast) {
+      const fastEnd = Math.min((fast / d) * factor, 0.3);
+      pct = (t / fast) * fastEnd;
+    } else {
+      const fastEnd = Math.min((fast / d) * factor, 0.3);
+      pct = fastEnd + ((t - fast) / (d - fast)) * (1 - fastEnd);
+    }
+    progressFill.style.width = (Math.min(pct, 1) * 100).toFixed(2) + '%';
   }
 
-  // ─────────────────────────────────────────
-  // HOOKS FLOTANTES
-  // ─────────────────────────────────────────
-  let hookIndex = 0;
-  let hookTimeout = null;
+  // ── Hooks flotantes ──
   const shownHooks = new Set();
+  let hookTimer = null;
 
-  function checkHooks(currentTime) {
-    CONFIG.hooks.forEach((hook, i) => {
-      if (!shownHooks.has(i) && currentTime >= hook.at && currentTime < hook.at + 2) {
+  function checkHooks(t) {
+    CONFIG.hooks.forEach((h, i) => {
+      if (!shownHooks.has(i) && t >= h.at && t < h.at + 3) {
         shownHooks.add(i);
-        showHook(hook.text);
+        clearTimeout(hookTimer);
+        hookBubble.textContent = h.text;
+        hookBubble.classList.add('visible');
+        hookTimer = setTimeout(() => hookBubble.classList.remove('visible'), 4500);
       }
     });
   }
 
-  function showHook(text) {
-    clearTimeout(hookTimeout);
-    hookBubble.textContent = text;
-    hookBubble.classList.add('visible');
-    hookTimeout = setTimeout(() => {
-      hookBubble.classList.remove('visible');
-    }, 4000);
-  }
+  // ── Botón de compra ──
+  let buyBtnShown = false;
 
-  // ─────────────────────────────────────────
-  // BOTÓN DE COMPRA — aparece en X segundos
-  // ─────────────────────────────────────────
-  let buyButtonShown = false;
-
-  function checkBuyButton(currentTime) {
-    if (!buyButtonShown && currentTime >= CONFIG.buyButtonAppearAt) {
-      buyButtonShown = true;
-      buySection.classList.add('visible');
-      buySection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  // ── Sticky btn ──
+  function updateStickyBtn(t) {
+    let stage = CONFIG.stickyButtonStages[0];
+    for (const s of CONFIG.stickyButtonStages) {
+      if (t >= s.from) stage = s;
     }
-  }
+    stickyBtn.textContent = stage.text;
 
-  // ─────────────────────────────────────────
-  // STICKY BTN — cambia texto según el video
-  // ─────────────────────────────────────────
-  function updateStickyBtn(currentTime) {
-    let currentStage = CONFIG.stickyButtonStages[0];
-
-    for (const stage of CONFIG.stickyButtonStages) {
-      if (currentTime >= stage.from) currentStage = stage;
-    }
-
-    stickyBtn.textContent = currentStage.text;
-
-    // Activar el botón cuando ya llega al momento de compra
-    if (currentTime >= CONFIG.buyButtonAppearAt) {
-      stickyBtn.classList.remove('inactive');
+    if (t >= CONFIG.buyButtonAppearAt) {
+      stickyBtn.className = 'sticky-btn active';
       stickyBtn.onclick = () => window.open(CONFIG.hotmartUrl, '_blank', 'noopener');
     } else {
-      stickyBtn.classList.add('inactive');
+      stickyBtn.className = 'sticky-btn inactive';
       stickyBtn.onclick = null;
     }
   }
 
-  // ─────────────────────────────────────────
-  // LOOP PRINCIPAL (timeupdate)
-  // ─────────────────────────────────────────
-  video.addEventListener('timeupdate', () => {
-    const t = video.currentTime;
-    const d = video.duration;
-
-    updateProgressBar(t, d);
-    checkHooks(t);
-    checkBuyButton(t);
-    updateStickyBtn(t);
-  });
-
-  // ─────────────────────────────────────────
-  // CONTADOR DE URGENCIA
-  // ─────────────────────────────────────────
+  // ── Countdown urgencia ──
   if (CONFIG.showUrgencyTimer) {
-    // Guardar en sessionStorage para que no se reinicie al refrescar
-    let endTime = parseInt(sessionStorage.getItem('esencia_timer_end') || '0');
-
-    if (!endTime || endTime < Date.now()) {
-      endTime = Date.now() +
-        CONFIG.urgencyHours   * 3600000 +
-        CONFIG.urgencyMinutes * 60000   +
-        CONFIG.urgencySeconds * 1000;
-      sessionStorage.setItem('esencia_timer_end', endTime.toString());
+    let end = parseInt(sessionStorage.getItem('esencia_end') || '0');
+    if (!end || end < Date.now()) {
+      end = Date.now()
+        + CONFIG.urgencyHours   * 3600000
+        + CONFIG.urgencyMinutes * 60000
+        + CONFIG.urgencySeconds * 1000;
+      sessionStorage.setItem('esencia_end', end.toString());
     }
-
-    function updateCountdown() {
-      const diff = Math.max(0, endTime - Date.now());
+    function tick() {
+      const diff = Math.max(0, end - Date.now());
       const h = Math.floor(diff / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
@@ -1047,16 +1003,21 @@ body {
         String(h).padStart(2,'0') + ':' +
         String(m).padStart(2,'0') + ':' +
         String(s).padStart(2,'0');
-
-      if (diff > 0) {
-        requestAnimationFrame(() => setTimeout(updateCountdown, 1000));
-      } else {
-        countdownEl.textContent = '00:00:00';
-      }
+      if (diff > 0) setTimeout(tick, 1000);
     }
-
-    updateCountdown();
+    tick();
   }
+
+  // ── Alerta al cerrar página ──
+  window.addEventListener('beforeunload', e => {
+    if (videoStarted && !video.ended) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+
+  // ── Iniciar ──
+  initHLS();
 
 })();
 </script>
