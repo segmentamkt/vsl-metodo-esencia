@@ -485,6 +485,98 @@ body {
 .mini-footer a { color: inherit; }
 
 /* ═══════════════════════════════════════
+   POPUP DE URGENCIA
+   ═══════════════════════════════════════ */
+.exit-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,10,5,0.85);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.exit-popup.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.exit-popup-box {
+  background: var(--tierra);
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 20px;
+  padding: 36px 28px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  transform: translateY(16px);
+  transition: transform 0.35s ease;
+}
+
+.exit-popup.visible .exit-popup-box {
+  transform: translateY(0);
+}
+
+.exit-popup-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.exit-popup-title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 4vw, 26px);
+  color: var(--aurora);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.exit-popup-text {
+  font-size: 15px;
+  color: var(--piedra);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.exit-popup-text strong { color: var(--crema); }
+
+.exit-popup-btn {
+  display: block;
+  background: linear-gradient(135deg, var(--salvia), var(--musgo));
+  color: var(--blanco);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 16px 24px;
+  border-radius: 60px;
+  margin-bottom: 14px;
+  animation: pulse-glow 2.5s ease-in-out infinite;
+  transition: transform 0.2s;
+}
+
+.exit-popup-btn:hover { transform: scale(1.02); }
+
+.exit-popup-skip {
+  background: none;
+  border: none;
+  color: rgba(184,168,152,0.5);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.exit-popup-skip:hover { color: var(--piedra); }
+
+/* ═══════════════════════════════════════
    ANIMATIONS
    ═══════════════════════════════════════ */
 @keyframes fadeInUp {
@@ -636,6 +728,24 @@ body {
 
 </div><!-- /page -->
 
+<!-- ═══ POPUP DE URGENCIA ═══ -->
+<div class="exit-popup" id="exitPopup" role="dialog" aria-modal="true">
+  <div class="exit-popup-box">
+    <div class="exit-popup-icon">⏳</div>
+    <h2 class="exit-popup-title">¡Espera! Esta oferta es solo por hoy</h2>
+    <p class="exit-popup-text">
+      Si cierras ahora, perderás el precio especial de <strong>$67 USD</strong>.<br>
+      El curso sube de precio esta noche a medianoche.
+    </p>
+    <a href="#" class="exit-popup-btn" id="popupBuy">
+      🌿 Sí, quiero el Método Esencia ahora
+    </a>
+    <button class="exit-popup-skip" id="popupClose">
+      No, prefiero seguir pagando más después →
+    </button>
+  </div>
+</div>
+
 <!-- ═══ STICKY BAR ═══ -->
 <div class="sticky-bar">
   <button class="sticky-btn inactive" id="stickyBtn">
@@ -751,23 +861,68 @@ body {
     }
   });
 
-  // Si el usuario pausa el video, reanudarlo automáticamente
+  // ── Detectar si la pausa es del usuario o del buffer ──
+  let isBuffering = false;
+
+  video.addEventListener('waiting', () => { isBuffering = true; });
+  video.addEventListener('playing', () => { isBuffering = false; });
+  video.addEventListener('canplay', () => { isBuffering = false; });
+
+  // Solo forzar reanudación si el usuario pausó (no si es buffering)
   video.addEventListener('pause', () => {
-    if (videoStarted) {
+    if (videoStarted && !isBuffering && !video.ended) {
+      // Mostrar popup de urgencia
+      showExitPopup();
+      // Reanudar después de 800ms
       setTimeout(() => {
-        if (video.paused && videoStarted) video.play().catch(() => {});
-      }, 300);
+        if (video.paused && !video.ended) video.play().catch(() => {});
+      }, 800);
     }
   });
 
-  // Bloquear seeking (adelantar/retroceder)
+  // Bloquear seeking — solo si el salto es mayor a 3 segundos
   let lastTime = 0;
+  let seekBlocked = false;
   video.addEventListener('timeupdate', () => {
-    // Solo bloquear si el salto es mayor a 2 segundos (para no interferir con la reproducción normal)
-    if (Math.abs(video.currentTime - lastTime) > 2) {
-      video.currentTime = lastTime;
+    if (!seekBlocked) {
+      const diff = video.currentTime - lastTime;
+      // Salto hacia adelante > 3s = bloquear. Salto hacia atrás = bloquear.
+      if (diff > 3 || diff < -0.5) {
+        seekBlocked = true;
+        video.currentTime = lastTime;
+        setTimeout(() => { seekBlocked = false; }, 500);
+      } else {
+        lastTime = video.currentTime;
+      }
     }
-    lastTime = video.currentTime;
+  });
+
+  // ─────────────────────────────────────────
+  // POPUP DE URGENCIA (al pausar o salir)
+  // ─────────────────────────────────────────
+  const popup = document.getElementById('exitPopup');
+  const popupClose = document.getElementById('popupClose');
+  const popupBuy = document.getElementById('popupBuy');
+
+  function showExitPopup() {
+    if (popup) popup.classList.add('visible');
+  }
+
+  function hideExitPopup() {
+    if (popup) popup.classList.remove('visible');
+    // Reanudar video
+    if (video.paused && !video.ended) video.play().catch(() => {});
+  }
+
+  if (popupClose) popupClose.addEventListener('click', hideExitPopup);
+  if (popupBuy)   popupBuy.addEventListener('click', () => { window.open(CONFIG.hotmartUrl, '_blank', 'noopener'); });
+
+  // También mostrar popup si intenta cerrar/salir de la página
+  window.addEventListener('beforeunload', (e) => {
+    if (videoStarted && !video.ended) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
   });
 
   // ─────────────────────────────────────────
