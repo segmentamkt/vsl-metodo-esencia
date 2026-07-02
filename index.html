@@ -14,24 +14,21 @@ const CONFIG = {
   videoSrc: "https://stream.mux.com/m5HozKavbfkyx01z02YAB5m8e02x02ft6pWKirY6zhtUBl4.m3u8",
   hotmartUrl: "https://pay.hotmart.com/TU_LINK_AQUI",
 
-  // ── DESBLOQUEO DEL BOTÓN ──
-  // Porcentaje del video en que se desbloquea el botón de compra (0.5 = 50%)
+  // Porcentaje del video en que se desbloquea el botón (0.5 = 50%)
   unlockAtPercent: 0.5,
 
-  // ── POPUP DE PAUSA ──
   // Máximo de veces que aparece el popup al pausar
   maxPausePopups: 3,
 
-  // ── TEXTOS DEL BOTÓN FIJO (abajo) ──
-  // "pct" es el porcentaje del video (0 a 1)
+  // Textos del botón fijo de abajo (pct = porcentaje del video 0 a 1)
   stickyButtonStages: [
     { pct: 0,    text: "🎬 Sigue viendo — lo importante viene ahora" },
-    { pct: 0.15, text: "👀 Presta atención a esto..." },
-    { pct: 0.35, text: "¿Ya sientes que esto es para ti?" },
-    { pct: 0.5,  text: "🌿 Sí, quiero transformar mi vida — $67 USD" },
+    { pct: 0.2,  text: "👀 Presta atención a esto..." },
+    { pct: 0.4,  text: "Ya casi desbloqueas tu acceso..." },
+    { pct: 0.5,  text: "🌿 Quiero el Método Esencia — $67 USD" },
   ],
 
-  // ── HOOKS FLOTANTES (en segundos del video) ──
+  // Hooks flotantes (en segundos del video)
   hooks: [
     { at: 20,  text: "🌱 Lo que sigue te va a sorprender..." },
     { at: 60,  text: "💡 Esto nadie te lo había explicado así" },
@@ -40,13 +37,12 @@ const CONFIG = {
     { at: 320, text: "✨ Tu momento de actuar está llegando" },
   ],
 
-  // ── CONTADOR DE URGENCIA ──
-  showUrgencyTimer: true,
+  // Contador de urgencia (aparece desde el inicio)
   urgencyHours: 23,
   urgencyMinutes: 47,
   urgencySeconds: 0,
 
-  // ── BARRA DE PROGRESO FALSA ──
+  // Barra de progreso falsa
   fastProgressUntil: 30,
   fastProgressFactor: 2.5,
 };
@@ -69,7 +65,7 @@ const CONFIG = {
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body:    'Lato', Arial, sans-serif;
-  --max-w: 660px;
+  --max-w: 620px;
   --radius: 14px;
 }
 
@@ -79,7 +75,7 @@ html { font-size: 16px; }
 body {
   font-family: var(--font-body);
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--crema);
   min-height: 100vh;
   overflow-x: hidden;
@@ -95,97 +91,53 @@ body {
 .page {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 16px 130px;
+  padding: 0 14px 110px;
 }
 
-/* ══ ALERTA SUPERIOR ══ */
-.top-alert {
-  background: var(--rojo);
-  text-align: center;
-  padding: 10px 16px;
+/* ══ CONTADOR SUPERIOR (siempre visible desde inicio) ══ */
+.top-urgency {
+  background: linear-gradient(90deg, #a3302a, #c0392b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px 16px;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.5px;
   color: #fff;
   position: sticky;
   top: 0;
   z-index: 50;
+  flex-wrap: wrap;
+  letter-spacing: 0.3px;
 }
-
-/* ══ HEADER ══ */
-.header { text-align: center; padding: 32px 0 24px; }
-
-.logo-wrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-  opacity: 0.8;
-}
-.logo-leaf { width: 26px; height: 26px; }
-.logo-name {
+.top-urgency .cd {
   font-family: var(--font-display);
-  font-size: 13px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--menta);
-}
-
-.pre-headline {
-  display: inline-block;
-  background: rgba(200,165,90,0.15);
-  border: 1px solid rgba(200,165,90,0.3);
-  border-radius: 40px;
-  padding: 5px 16px;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--aurora);
-  margin-bottom: 16px;
+  letter-spacing: 1px;
+  background: rgba(0,0,0,0.25);
+  padding: 2px 10px;
+  border-radius: 6px;
 }
 
+/* ══ HEADER MÍNIMO ══ */
+.header {
+  text-align: center;
+  padding: 18px 0 14px;
+}
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(24px, 5.5vw, 40px);
+  font-size: clamp(20px, 4.8vw, 30px);
   font-weight: 700;
   line-height: 1.15;
   color: var(--blanco);
-  margin-bottom: 14px;
   text-shadow: 0 2px 20px rgba(0,0,0,0.4);
 }
 .headline em { font-style: italic; color: var(--aurora); }
 
-.subheadline {
-  font-size: clamp(14px, 2.5vw, 17px);
-  color: var(--menta);
-  max-width: 500px;
-  margin: 0 auto 6px;
-  font-weight: 400;
-}
-
-.divider {
-  width: 50px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--aurora), transparent);
-  margin: 18px auto;
-}
-
 /* ══ VIDEO ══ */
 .video-section { position: relative; }
-
-.dont-close {
-  background: rgba(192,57,43,0.12);
-  border: 1px solid rgba(192,57,43,0.3);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #e8a090;
-  text-align: center;
-  margin-bottom: 16px;
-  letter-spacing: 0.3px;
-}
 
 .video-wrapper {
   position: relative;
@@ -195,7 +147,7 @@ body {
   box-shadow:
     0 0 0 1px rgba(143,184,126,0.2),
     0 4px 6px rgba(0,0,0,0.3),
-    0 20px 60px rgba(0,0,0,0.5);
+    0 16px 50px rgba(0,0,0,0.5);
   aspect-ratio: 16/9;
 }
 
@@ -204,10 +156,9 @@ body {
   height: 100%;
   display: block;
   object-fit: cover;
-  pointer-events: none; /* Los toques los captura el tapLayer */
+  pointer-events: none;
 }
 
-/* Capa que captura los toques deliberados sobre el video */
 .tap-layer {
   position: absolute;
   inset: 0;
@@ -216,7 +167,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Overlay de play inicial */
 .play-overlay {
   position: absolute;
   inset: 0;
@@ -232,37 +182,36 @@ body {
 .play-overlay.hidden { opacity: 0; pointer-events: none; }
 
 .play-circle {
-  width: 76px;
-  height: 76px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: rgba(200,165,90,0.92);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   transition: transform 0.2s, background 0.2s;
   box-shadow: 0 0 0 10px rgba(200,165,90,0.15);
 }
 .play-overlay:hover .play-circle { transform: scale(1.08); background: var(--aurora); }
-.play-circle svg { width: 28px; height: 28px; margin-left: 5px; }
+.play-circle svg { width: 26px; height: 26px; margin-left: 5px; }
 .play-label {
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--crema);
   letter-spacing: 1px;
 }
 
-/* Hook flotante */
 .hook-bubble {
   position: absolute;
-  top: 14px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
   background: rgba(20,13,8,0.9);
   border: 1px solid rgba(200,165,90,0.45);
   border-radius: 40px;
-  padding: 7px 18px;
-  font-size: 13px;
+  padding: 6px 16px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--aurora);
   white-space: nowrap;
@@ -273,47 +222,105 @@ body {
 }
 .hook-bubble.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ══ PROGRESO FALSO ══ */
+/* ══ BARRA DE PROGRESO GRUESA (sin números) ══ */
 .progress-track {
   width: 100%;
-  height: 5px;
+  height: 10px;
   background: rgba(255,255,255,0.08);
   border-radius: 0 0 var(--radius) var(--radius);
   overflow: hidden;
-  margin-bottom: 6px;
+  margin-bottom: 16px;
 }
 .progress-fill {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, var(--salvia), var(--aurora));
-  border-radius: 4px;
   transition: width 1s linear;
 }
-.video-time {
-  text-align: right;
-  font-size: 11px;
-  color: var(--piedra);
-  margin-bottom: 20px;
-  padding-right: 2px;
-}
 
-/* ══ COPY ══ */
-.body-copy { text-align: center; padding: 4px 0 20px; }
-.body-copy p {
-  font-size: 15px;
-  color: var(--piedra);
+/* ══ BOTÓN DE COMPRA CON CANDADO (visible desde inicio) ══ */
+.buy-section { text-align: center; }
+
+.buy-btn {
+  display: block;
+  font-family: var(--font-body);
+  font-size: clamp(15px, 3.2vw, 19px);
+  font-weight: 900;
+  text-decoration: none;
+  padding: 18px 28px;
+  border-radius: 60px;
+  border: none;
+  width: 100%;
   max-width: 500px;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: 1.3;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  transition: transform 0.2s, background 0.4s, box-shadow 0.4s;
 }
-.body-copy strong { color: var(--crema); font-weight: 700; }
 
-/* ══ FEATURES ══ */
+.buy-btn.locked {
+  background: rgba(255,255,255,0.05);
+  color: rgba(168,152,128,0.65);
+  cursor: not-allowed;
+  pointer-events: none;
+  border: 1px dashed rgba(168,152,128,0.3);
+}
+
+.buy-btn.unlocked {
+  background: linear-gradient(135deg, #4a7a38 0%, #2d5220 100%);
+  color: #fff;
+  cursor: pointer;
+  pointer-events: auto;
+  border: none;
+  box-shadow: 0 8px 30px rgba(42,82,32,0.5), 0 0 0 3px rgba(143,184,126,0.2);
+  animation: pulse-buy 2.5s ease-in-out infinite;
+}
+.buy-btn.unlocked:hover { transform: translateY(-2px) scale(1.02); }
+.buy-btn.unlocked:active { transform: scale(0.98); }
+
+.buy-btn-sub {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 4px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+@keyframes pulse-buy {
+  0%,100% { box-shadow: 0 8px 30px rgba(42,82,32,0.5), 0 0 0 3px rgba(143,184,126,0.2); }
+  50%      { box-shadow: 0 8px 30px rgba(42,82,32,0.5), 0 0 0 10px rgba(143,184,126,0); }
+}
+@keyframes unlock-pop {
+  0%{transform:scale(1);} 40%{transform:scale(1.06);} 100%{transform:scale(1);}
+}
+.buy-btn.just-unlocked { animation: unlock-pop 0.7s ease, pulse-buy 2.5s ease-in-out 0.7s infinite; }
+
+/* ══ SECCIÓN INFERIOR (fuera de vista inicial) ══ */
+.below-fold { margin-top: 40px; }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 4vw, 24px);
+  font-weight: 700;
+  color: var(--blanco);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.section-sub {
+  text-align: center;
+  font-size: 14px;
+  color: var(--piedra);
+  max-width: 460px;
+  margin: 0 auto 22px;
+}
+
 .features {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin: 4px 0 28px;
 }
 @media (max-width: 420px) { .features { grid-template-columns: 1fr; } }
 
@@ -334,110 +341,9 @@ body {
 }
 .feature-desc { font-size: 12px; color: var(--piedra); line-height: 1.5; }
 
-/* ══ BOTÓN DE COMPRA CON CANDADO ══ */
-.buy-section { text-align: center; }
-
-.buy-btn {
-  display: block;
-  font-family: var(--font-body);
-  font-size: clamp(15px, 3vw, 19px);
-  font-weight: 900;
-  text-decoration: none;
-  padding: 20px 32px;
-  border-radius: 60px;
-  border: none;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  line-height: 1.3;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  transition: transform 0.2s, background 0.4s, box-shadow 0.4s;
-  position: relative;
-}
-
-/* Estado BLOQUEADO */
-.buy-btn.locked {
-  background: rgba(255,255,255,0.05);
-  color: rgba(168,152,128,0.6);
-  cursor: not-allowed;
-  pointer-events: none;
-  border: 1px dashed rgba(168,152,128,0.3);
-  box-shadow: none;
-}
-
-/* Estado DESBLOQUEADO */
-.buy-btn.unlocked {
-  background: linear-gradient(135deg, #4a7a38 0%, #2d5220 100%);
-  color: #fff;
-  cursor: pointer;
-  pointer-events: auto;
-  border: none;
-  box-shadow: 0 8px 30px rgba(42,82,32,0.5), 0 0 0 3px rgba(143,184,126,0.2);
-  animation: pulse-buy 2.5s ease-in-out infinite;
-}
-.buy-btn.unlocked:hover { transform: translateY(-2px) scale(1.02); }
-.buy-btn.unlocked:active { transform: scale(0.98); }
-
-.buy-btn-sub {
-  display: block;
-  font-size: 11px;
-  font-weight: 400;
-  opacity: 0.85;
-  margin-top: 5px;
-  text-transform: none;
-  letter-spacing: 0;
-}
-
-@keyframes pulse-buy {
-  0%,100% { box-shadow: 0 8px 30px rgba(42,82,32,0.5), 0 0 0 3px rgba(143,184,126,0.2); }
-  50%      { box-shadow: 0 8px 30px rgba(42,82,32,0.5), 0 0 0 10px rgba(143,184,126,0); }
-}
-
-/* Animación de desbloqueo */
-@keyframes unlock-pop {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(1.06); }
-  100% { transform: scale(1); }
-}
-.buy-btn.just-unlocked { animation: unlock-pop 0.7s ease, pulse-buy 2.5s ease-in-out 0.7s infinite; }
-
-.guarantee {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 12px;
-  font-size: 12px;
-  color: var(--piedra);
-}
-
-.urgency-box {
-  background: rgba(42,31,20,0.7);
-  border: 1px solid rgba(200,165,90,0.2);
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--arena);
-  flex-wrap: wrap;
-}
-.countdown {
-  font-family: var(--font-display);
-  font-size: 22px;
-  color: var(--aurora);
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-
-/* ══ FOOTER ══ */
 .mini-footer {
   text-align: center;
-  padding: 16px 0 0;
+  padding: 28px 0 0;
   font-size: 11px;
   color: rgba(168,152,128,0.45);
   line-height: 1.7;
@@ -449,7 +355,7 @@ body {
   position: fixed;
   bottom: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 10px 16px 12px;
+  padding: 10px 14px 12px;
   background: rgba(18,12,7,0.97);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(143,184,126,0.12);
@@ -461,14 +367,13 @@ body {
   width: 100%;
   max-width: var(--max-w);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   text-align: center;
   padding: 14px 24px;
   border-radius: 60px;
   border: none;
   transition: background 0.3s, transform 0.2s;
-  letter-spacing: 0.2px;
 }
 .sticky-btn.inactive {
   background: rgba(255,255,255,0.06);
@@ -482,7 +387,6 @@ body {
   box-shadow: 0 4px 20px rgba(42,82,32,0.4);
   text-transform: uppercase;
 }
-.sticky-btn.active:hover { transform: scale(1.01); }
 
 /* ══ POPUPS ══ */
 .popup-backdrop {
@@ -505,8 +409,8 @@ body {
   background: linear-gradient(160deg, #2a1f14, #1a1208);
   border: 1px solid rgba(200,165,90,0.35);
   border-radius: 20px;
-  padding: 36px 28px 28px;
-  max-width: 400px;
+  padding: 34px 26px 26px;
+  max-width: 390px;
   width: 100%;
   text-align: center;
   box-shadow: 0 30px 80px rgba(0,0,0,0.7);
@@ -515,45 +419,42 @@ body {
 }
 .popup-backdrop.visible .popup-box { transform: scale(1); }
 
-.popup-icon { font-size: 42px; margin-bottom: 10px; }
-
+.popup-icon { font-size: 40px; margin-bottom: 10px; }
 .popup-title {
   font-family: var(--font-display);
-  font-size: clamp(20px, 5vw, 26px);
+  font-size: clamp(19px, 5vw, 25px);
   color: var(--blanco);
   margin-bottom: 12px;
   line-height: 1.25;
 }
 .popup-title span { color: var(--aurora); }
-
 .popup-body {
   font-size: 14px;
   color: var(--piedra);
-  line-height: 1.65;
-  margin-bottom: 24px;
+  line-height: 1.6;
+  margin-bottom: 22px;
 }
 .popup-body strong { color: var(--crema); }
-
 .popup-cta {
   display: block;
   background: linear-gradient(135deg, #4a7a38, #2d5220);
   color: #fff;
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 900;
   text-decoration: none;
-  padding: 16px 24px;
+  padding: 16px 22px;
   border-radius: 60px;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.3px;
   border: none;
   cursor: pointer;
   width: 100%;
+  line-height: 1.3;
   animation: pulse-buy 2.5s ease-in-out infinite;
   transition: transform 0.2s;
 }
 .popup-cta:hover { transform: scale(1.02); }
-
 .popup-skip {
   background: none;
   border: none;
@@ -562,71 +463,39 @@ body {
   font-family: var(--font-body);
   cursor: pointer;
   padding: 8px 6px 0;
-  transition: color 0.2s;
   width: 100%;
 }
 .popup-skip:hover { color: var(--piedra); }
 
-/* ══ ANIMATIONS ══ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.anim { animation: fadeUp 0.7s ease both; }
-.d1 { animation-delay: 0.1s; }
-.d2 { animation-delay: 0.25s; }
-.d3 { animation-delay: 0.4s; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+.anim { animation: fadeUp 0.6s ease both; }
 
 @media (max-width: 480px) {
-  .buy-btn { font-size: 14px; padding: 17px 20px; }
+  .buy-btn { font-size: 14px; padding: 16px 20px; }
   .sticky-btn { font-size: 13px; }
-  .popup-box { padding: 28px 20px 22px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Alerta roja superior -->
-<div class="top-alert">
-  ⚠️ NO CIERRES ESTA PÁGINA — Puedes no volver a encontrar esta oferta
+<!-- CONTADOR SUPERIOR (siempre visible) -->
+<div class="top-urgency">
+  <span>⏳ Esta oferta vence en:</span>
+  <span class="cd" id="topCountdown">23:47:00</span>
 </div>
 
 <div class="page">
 
-  <!-- HEADER -->
+  <!-- TÍTULO CORTO -->
   <header class="header anim">
-    <div class="logo-wrap">
-      <svg class="logo-leaf" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M13 2 C13 2 21 8 21 16 C21 20.4 17.4 24 13 24 C8.6 24 5 20.4 5 16 C5 8 13 2 13 2Z"
-              stroke="#8fb87e" stroke-width="1.4" fill="rgba(143,184,126,0.1)"/>
-        <line x1="13" y1="24" x2="13" y2="9" stroke="#8fb87e" stroke-width="1" stroke-dasharray="2 2"/>
-      </svg>
-      <span class="logo-name">Método Esencia</span>
-    </div>
-
-    <div class="pre-headline">Solo disponible por tiempo limitado</div>
-
     <h1 class="headline">
-      Deja de vivir en <em>piloto automático</em><br>
-      y empieza a ser quien<br>
-      siempre quisiste ser
+      Deja de vivir en <em>piloto automático</em>
     </h1>
-
-    <div class="divider"></div>
-
-    <p class="subheadline d2 anim">
-      Mira este video hasta el final — lo que descubrirás puede cambiar el rumbo de tu vida hoy mismo.
-    </p>
   </header>
 
   <!-- VIDEO -->
-  <section class="video-section d3 anim">
-
-    <div class="dont-close">
-      🔴 IMPORTANTE: Mira el video completo — el acceso se desbloquea mientras avanzas
-    </div>
-
+  <section class="video-section anim">
     <div class="video-wrapper">
       <video
         id="mainVideo"
@@ -636,10 +505,8 @@ body {
         controlsList="nodownload nofullscreen noremoteplayback"
       ></video>
 
-      <!-- Capa de toques deliberados -->
       <div class="tap-layer" id="tapLayer"></div>
 
-      <!-- Play overlay -->
       <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Reproducir video">
         <div class="play-circle">
           <svg viewBox="0 0 28 28" fill="white"><polygon points="7,4 23,14 7,24"/></svg>
@@ -647,66 +514,55 @@ body {
         <span class="play-label">Toca para ver</span>
       </div>
 
-      <!-- Hook flotante -->
       <div class="hook-bubble" id="hookBubble" aria-live="polite"></div>
     </div>
 
+    <!-- Barra gruesa sin números -->
     <div class="progress-track">
       <div class="progress-fill" id="progressFill"></div>
     </div>
-    <div class="video-time" id="videoTime">0:00</div>
-
   </section>
 
-  <!-- COPY -->
-  <div class="body-copy">
-    <p>
-      En este video descubrirás el <strong>método de 3 pasos</strong> que ha ayudado a cientos de personas a sanar sus bloqueos internos, <strong>dejar de postergar</strong> y finalmente vivir la vida que siempre han querido — sin necesitar más disciplina ni fuerza de voluntad.
-    </p>
-  </div>
-
-  <!-- FEATURES -->
-  <div class="features">
-    <div class="feature-card">
-      <div class="feature-icon">🌱</div>
-      <div class="feature-title">Niño Interior</div>
-      <div class="feature-desc">Sana las heridas del pasado que hoy te frenan sin que lo notes</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <div class="feature-title">Sin Procrastinación</div>
-      <div class="feature-desc">Actúa desde tu esencia, no desde el miedo o la obligación</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🌿</div>
-      <div class="feature-title">Metas Reales</div>
-      <div class="feature-desc">Define metas que nazcan de quién eres, no de lo que otros esperan</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🤍</div>
-      <div class="feature-title">Paz Interior</div>
-      <div class="feature-desc">Vive desde calma, claridad y autenticidad real — no desde el caos</div>
-    </div>
-  </div>
-
-  <!-- BOTÓN COMPRA CON CANDADO -->
+  <!-- BOTÓN CON CANDADO -->
   <div class="buy-section">
     <a href="#" class="buy-btn locked" id="buyBtn" rel="noopener">
-      <span id="buyBtnText">🔒 El acceso se desbloquea al 50% del video</span>
+      <span id="buyBtnText">🔒 Se desbloquea mientras ves el video</span>
       <span class="buy-btn-sub" id="buyBtnSub">Sigue viendo para desbloquear tu acceso</span>
     </a>
-    <div class="guarantee" id="guaranteeBox" style="display:none;">
-      🛡️ Si en 7 días no ves resultados, te devolvemos tu dinero sin preguntas
-    </div>
-    <div class="urgency-box" id="urgencyBox" style="display:none;">
-      <span>⏳ Esta oferta especial vence en:</span>
-      <span class="countdown" id="countdown">23:47:00</span>
-    </div>
   </div>
 
-  <div class="mini-footer">
-    <p>© 2025 Método Esencia · <a href="#">Privacidad</a> · <a href="#">Términos</a></p>
-    <p>Este sitio no está afiliado a Facebook™ ni a Meta Platforms Inc.</p>
+  <!-- ══ CONTENIDO INFERIOR (fuera de vista inicial) ══ -->
+  <div class="below-fold">
+    <h2 class="section-title">Lo que vas a transformar</h2>
+    <p class="section-sub">Un método de 3 pasos para reconectar contigo y empezar a actuar desde tu esencia.</p>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🌱</div>
+        <div class="feature-title">Niño Interior</div>
+        <div class="feature-desc">Sana las heridas del pasado que hoy te frenan sin que lo notes</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Sin Procrastinación</div>
+        <div class="feature-desc">Actúa desde tu esencia, no desde el miedo o la obligación</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-title">Metas Reales</div>
+        <div class="feature-desc">Metas que nacen de quién eres, no de lo que otros esperan</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤍</div>
+        <div class="feature-title">Paz Interior</div>
+        <div class="feature-desc">Vive desde calma y claridad — no desde el caos</div>
+      </div>
+    </div>
+
+    <div class="mini-footer">
+      <p>© 2025 Método Esencia · <a href="#">Privacidad</a> · <a href="#">Términos</a></p>
+      <p>Este sitio no está afiliado a Facebook™ ni a Meta Platforms Inc.</p>
+    </div>
   </div>
 
 </div><!-- /page -->
@@ -718,15 +574,13 @@ body {
   </button>
 </div>
 
-<!-- POPUP DE PAUSA (un solo botón) -->
+<!-- POPUP DE PAUSA -->
 <div class="popup-backdrop" id="pausePopup" role="dialog" aria-modal="true">
   <div class="popup-box">
     <div class="popup-icon">🌿</div>
-    <h2 class="popup-title">
-      Tu transformación<br><span>no puede esperar</span>
-    </h2>
+    <h2 class="popup-title">Tu transformación<br><span>no puede esperar</span></h2>
     <p class="popup-body">
-      Lo que viene en el video es justo lo que necesitas escuchar.<br>
+      Lo que viene es justo lo que necesitas escuchar.<br>
       <strong>No te detengas ahora.</strong>
     </p>
     <button class="popup-cta" id="popupResume">
@@ -735,24 +589,19 @@ body {
   </div>
 </div>
 
-<!-- POPUP FINAL (cuando termina el video) -->
+<!-- POPUP FINAL -->
 <div class="popup-backdrop" id="endPopup" role="dialog" aria-modal="true">
   <div class="popup-box">
     <div class="popup-icon">✨</div>
-    <h2 class="popup-title">
-      El video terminó.<br><span>Tu decisión empieza ahora.</span>
-    </h2>
+    <h2 class="popup-title">El video terminó.<br><span>Tu decisión empieza ahora.</span></h2>
     <p class="popup-body">
-      Ya conoces el método. Ya sabes lo que es posible.<br>
-      Lo único que falta es que <strong>des el primer paso</strong>.<br><br>
-      Acceso completo al Método Esencia por solo <strong>$67 USD</strong> — precio válido únicamente hoy.
+      Ya conoces el método. Lo único que falta es que <strong>des el primer paso</strong>.<br><br>
+      Acceso completo por solo <strong>$67 USD</strong> — precio válido únicamente hoy.
     </p>
     <a href="#" class="popup-cta" id="endPopupBuy" rel="noopener">
       🌿 Quiero cambiar mi vida — $67 USD
     </a>
-    <button class="popup-skip" id="endPopupClose">
-      Ver la página de nuevo →
-    </button>
+    <button class="popup-skip" id="endPopupClose">Ver la página de nuevo →</button>
   </div>
 </div>
 
@@ -770,14 +619,11 @@ body {
   const playOverlay  = document.getElementById('playOverlay');
   const hookBubble   = document.getElementById('hookBubble');
   const progressFill = document.getElementById('progressFill');
-  const videoTime    = document.getElementById('videoTime');
   const buyBtn       = document.getElementById('buyBtn');
   const buyBtnText   = document.getElementById('buyBtnText');
   const buyBtnSub    = document.getElementById('buyBtnSub');
-  const guaranteeBox = document.getElementById('guaranteeBox');
-  const urgencyBox   = document.getElementById('urgencyBox');
-  const countdownEl  = document.getElementById('countdown');
   const stickyBtn    = document.getElementById('stickyBtn');
+  const topCountdown = document.getElementById('topCountdown');
   const pausePopup   = document.getElementById('pausePopup');
   const popupResume  = document.getElementById('popupResume');
   const endPopup     = document.getElementById('endPopup');
@@ -786,9 +632,8 @@ body {
 
   endPopupBuy.href = CONFIG.hotmartUrl;
 
-  // ═══ ESTADO ═══
   let videoStarted   = false;
-  let userPaused     = false;   // true solo cuando NUESTRO handler pausa
+  let userPaused     = false;
   let pausePopupCount = 0;
   let unlocked       = false;
   let lastTime       = 0;
@@ -809,13 +654,12 @@ body {
     }
   }
 
-  // ═══ AUTOPLAY ═══
   function attemptAutoplay() {
     video.muted = true;
     video.play().then(() => {
       videoStarted = true;
       playOverlay.classList.add('hidden');
-    }).catch(() => { /* overlay visible, espera clic */ });
+    }).catch(() => {});
   }
 
   function startWithSound() {
@@ -836,7 +680,6 @@ body {
     if (e.key === 'Enter' || e.key === ' ') startWithSound();
   });
 
-  // Primer toque en la página activa el sonido (si autoplay fue muted)
   function activateSound() {
     if (videoStarted && video.muted) video.muted = false;
     document.removeEventListener('touchend', activateSound);
@@ -845,63 +688,46 @@ body {
   document.addEventListener('touchend', activateSound, { passive: true });
   document.addEventListener('click', activateSound);
 
-  // ═══ TAP DELIBERADO SOBRE EL VIDEO ═══
-  // Distingue entre scroll (dedo se mueve) y tap real (dedo quieto)
-  let touchStartX = 0, touchStartY = 0, touchStartT = 0;
-
+  // ═══ TAP DELIBERADO ═══
+  let tsx = 0, tsy = 0, tst = 0;
   tapLayer.addEventListener('touchstart', e => {
     const t = e.touches[0];
-    touchStartX = t.clientX;
-    touchStartY = t.clientY;
-    touchStartT = Date.now();
+    tsx = t.clientX; tsy = t.clientY; tst = Date.now();
   }, { passive: true });
 
   tapLayer.addEventListener('touchend', e => {
     const t = e.changedTouches[0];
-    const dx = Math.abs(t.clientX - touchStartX);
-    const dy = Math.abs(t.clientY - touchStartY);
-    const dt = Date.now() - touchStartT;
-    // Tap real: movimiento < 10px y duración < 400ms
-    if (dx < 10 && dy < 10 && dt < 400) {
-      handleDeliberateTap();
-    }
+    const dx = Math.abs(t.clientX - tsx);
+    const dy = Math.abs(t.clientY - tsy);
+    const dt = Date.now() - tst;
+    if (dx < 10 && dy < 10 && dt < 400) handleTap();
   }, { passive: true });
 
-  // Desktop: clic directo es deliberado
   tapLayer.addEventListener('click', e => {
-    // En móvil el click viene después del touchend; evitar doble disparo
-    if (e.pointerType === 'mouse' || !('ontouchstart' in window)) {
-      handleDeliberateTap();
-    }
+    if (!('ontouchstart' in window)) handleTap();
   });
 
-  function handleDeliberateTap() {
+  function handleTap() {
     if (!videoStarted) return;
     if (video.paused) {
-      // Reanudar
       video.play().catch(() => {});
-      hidePausePopup();
+      pausePopup.classList.remove('visible');
     } else {
-      // Pausar deliberadamente
       userPaused = true;
       video.pause();
     }
   }
 
-  // ═══ MANEJO DE PAUSA ═══
+  // ═══ PAUSA ═══
   video.addEventListener('pause', () => {
     if (!videoStarted || video.ended) return;
-
     if (userPaused) {
-      // Pausa deliberada del usuario → mostrar popup (máx N veces)
       userPaused = false;
       if (pausePopupCount < CONFIG.maxPausePopups) {
         pausePopupCount++;
         pausePopup.classList.add('visible');
       }
-      // Si ya superó el máximo, simplemente queda pausado (tap para reanudar)
     } else {
-      // Pausa del sistema (buffer, cambio de pestaña, etc.) → reanudar silenciosamente
       setTimeout(() => {
         if (video.paused && !video.ended && !pausePopup.classList.contains('visible')) {
           video.play().catch(() => {});
@@ -910,25 +736,16 @@ body {
     }
   });
 
-  function hidePausePopup() {
-    pausePopup.classList.remove('visible');
-  }
-
   popupResume.addEventListener('click', () => {
-    hidePausePopup();
+    pausePopup.classList.remove('visible');
     video.play().catch(() => {});
   });
 
-  // ═══ POPUP FINAL ═══
-  video.addEventListener('ended', () => {
-    endPopup.classList.add('visible');
-  });
+  // ═══ FINAL ═══
+  video.addEventListener('ended', () => endPopup.classList.add('visible'));
+  endPopupClose.addEventListener('click', () => endPopup.classList.remove('visible'));
 
-  endPopupClose.addEventListener('click', () => {
-    endPopup.classList.remove('visible');
-  });
-
-  // ═══ BLOQUEAR CONTROLES DE TECLADO ═══
+  // ═══ BLOQUEAR TECLADO ═══
   document.addEventListener('keydown', e => {
     const blocked = [' ','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','k','j','l','f','m'];
     if (blocked.includes(e.key) && document.activeElement === video) {
@@ -937,12 +754,11 @@ body {
   });
   video.addEventListener('contextmenu', e => e.preventDefault());
 
-  // ═══ LOOP PRINCIPAL ═══
+  // ═══ LOOP ═══
   video.addEventListener('timeupdate', () => {
     const t = video.currentTime;
     const d = video.duration || 1;
 
-    // Anti-seek
     if (!blockSeek) {
       const diff = t - lastTime;
       if (diff > 3 || diff < -0.5) {
@@ -954,56 +770,31 @@ body {
       lastTime = t;
     }
 
-    // Tiempo visible
-    const mins = Math.floor(t / 60);
-    const secs = Math.floor(t % 60);
-    videoTime.textContent = mins + ':' + secs.toString().padStart(2,'0');
-
-    // Progreso falso
     updateProgress(t, d);
-
-    // Hooks
     checkHooks(t);
 
-    // Desbloqueo del botón al 50%
-    if (!unlocked && d > 1 && (t / d) >= CONFIG.unlockAtPercent) {
-      unlockBuyButton();
-    }
-
-    // Sticky button
+    if (!unlocked && d > 1 && (t / d) >= CONFIG.unlockAtPercent) unlockBtn();
     updateStickyBtn(t / d);
   });
 
-  // ═══ DESBLOQUEO DEL BOTÓN ═══
-  function unlockBuyButton() {
+  function unlockBtn() {
     unlocked = true;
     buyBtn.classList.remove('locked');
     buyBtn.classList.add('unlocked', 'just-unlocked');
     buyBtn.href = CONFIG.hotmartUrl;
     buyBtnText.textContent = '🌿 Sí, quiero el Método Esencia — $67 USD';
-    buyBtnSub.textContent = 'Acceso inmediato · Garantía de 7 días · Pago 100% seguro';
-    guaranteeBox.style.display = 'flex';
-    if (CONFIG.showUrgencyTimer) {
-      urgencyBox.style.display = 'flex';
-      startCountdown();
-    }
+    buyBtnSub.textContent = 'Acceso inmediato · Pago 100% seguro';
   }
 
-  // ═══ PROGRESO FALSO ═══
   function updateProgress(t, d) {
     let pct;
     const fast = CONFIG.fastProgressUntil;
-    const factor = CONFIG.fastProgressFactor;
-    const fastEnd = Math.min((fast / d) * factor, 0.3);
-    if (t <= fast) {
-      pct = (t / fast) * fastEnd;
-    } else {
-      pct = fastEnd + ((t - fast) / (d - fast)) * (1 - fastEnd);
-    }
+    const fastEnd = Math.min((fast / d) * CONFIG.fastProgressFactor, 0.3);
+    if (t <= fast) pct = (t / fast) * fastEnd;
+    else pct = fastEnd + ((t - fast) / (d - fast)) * (1 - fastEnd);
     progressFill.style.width = (Math.min(pct, 1) * 100).toFixed(2) + '%';
   }
 
-  // ═══ HOOKS ═══
   const shownHooks = new Set();
   let hookTimer = null;
   function checkHooks(t) {
@@ -1018,14 +809,10 @@ body {
     });
   }
 
-  // ═══ STICKY BUTTON ═══
   function updateStickyBtn(pct) {
     let stage = CONFIG.stickyButtonStages[0];
-    for (const s of CONFIG.stickyButtonStages) {
-      if (pct >= s.pct) stage = s;
-    }
+    for (const s of CONFIG.stickyButtonStages) if (pct >= s.pct) stage = s;
     stickyBtn.textContent = stage.text;
-
     if (unlocked) {
       stickyBtn.className = 'sticky-btn active';
       stickyBtn.onclick = () => window.open(CONFIG.hotmartUrl, '_blank', 'noopener');
@@ -1035,15 +822,12 @@ body {
     }
   }
 
-  // ═══ COUNTDOWN ═══
-  let countdownStarted = false;
-  function startCountdown() {
-    if (countdownStarted) return;
-    countdownStarted = true;
+  // ═══ COUNTDOWN (desde el inicio) ═══
+  (function countdown() {
     let end = parseInt(sessionStorage.getItem('esencia_end') || '0');
     if (!end || end < Date.now()) {
       end = Date.now()
-        + CONFIG.urgencyHours   * 3600000
+        + CONFIG.urgencyHours * 3600000
         + CONFIG.urgencyMinutes * 60000
         + CONFIG.urgencySeconds * 1000;
       sessionStorage.setItem('esencia_end', end.toString());
@@ -1053,16 +837,15 @@ body {
       const h = Math.floor(diff / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
-      countdownEl.textContent =
+      topCountdown.textContent =
         String(h).padStart(2,'0') + ':' +
         String(m).padStart(2,'0') + ':' +
         String(s).padStart(2,'0');
       if (diff > 0) setTimeout(tick, 1000);
     }
     tick();
-  }
+  })();
 
-  // ═══ INICIAR ═══
   initHLS();
 
 })();
