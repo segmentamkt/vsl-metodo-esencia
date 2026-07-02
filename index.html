@@ -6,11 +6,14 @@
 <title>Método Esencia — Transforma Tu Vida Desde Adentro</title>
 <meta name="description" content="Descubre el método que miles han usado para sanar su niño interior, vencer la procrastinación y alcanzar sus metas de vida.">
 
+<!-- ═══════════════════════════════════════════
+     CONFIGURACIÓN — Edita solo esta sección
+     ═══════════════════════════════════════════ -->
 <script>
 const CONFIG = {
   // ── VIDEO ──────────────────────────────────
-  // Opciones: "video/vsl.mp4" (local) o URL de Cloudflare Stream / CDN externo
-  videoSrc: "video/vsl.mp4",
+  // Mux Playback URL
+  videoSrc: "https://stream.mux.com/m5HozKavbfkyx01z02YAB5m8e02x02ft6pWKirY6zhtUBl4.m3u8",
   videoPoster: "img/poster.jpg", // Imagen que se ve antes de reproducir
 
   // ── BOTÓN DE COMPRA ────────────────────────
@@ -18,10 +21,10 @@ const CONFIG = {
 
   // ── TIMING (en segundos) ───────────────────
   // Cuándo aparece el botón de compra principal
-  buyButtonAppearAt: 720, // 720 segundos = 12 minutos
+  buyButtonAppearAt: 720, // 12 minutos
 
   // ── TEXTOS DEL BOTÓN FIJO (abajo) ─────────
-  // El botón cambia de texto dinámicamente según el segundo del video
+  // El botón siempre visible cambia texto según el momento del video
   stickyButtonStages: [
     { from: 0,   text: "Sigue viendo el video..." },
     { from: 180, text: "Esto es solo el comienzo..." },
@@ -46,27 +49,33 @@ const CONFIG = {
   urgencySeconds: 0,
 
   // ── BARRA DE PROGRESO FALSA ────────────────
-  fastProgressUntil: 30, // Segundos iniciales donde va rápido
-  fastProgressFactor: 3, // Multiplicador de velocidad visual
+  // Velocidad fast al inicio (segundos donde acelera)
+  fastProgressUntil: 30,
+  // Factor de aceleración inicial (ej: 3 = avanza 3x rápido visualmente)
+  fastProgressFactor: 3,
 };
 </script>
 
 <style>
 /* ═══════════════════════════════════════
-   IMPORTS & VARIABLES (Paleta Natural / Paz)
+   IMPORTS
    ═══════════════════════════════════════ */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
 
+/* ═══════════════════════════════════════
+   VARIABLES — Paleta Natural / Paz
+   ═══════════════════════════════════════ */
 :root {
-  --tierra:     #3d2b1f;
-  --musgo:      #4a5e3a;
-  --salvia:     #7a9268;
-  --menta:      #a8c89a;
-  --crema:      #f5f0e8;
-  --arena:      #e8ddc8;
-  --piedra:     #b8a898;
-  --aurora:     #c8a96e;
-  --blanco:     #fdfaf5;
+  --tierra:    #3d2b1f;
+  --musgo:     #4a5e3a;
+  --salvia:    #7a9268;
+  --menta:     #a8c89a;
+  --crema:     #f5f0e8;
+  --arena:     #e8ddc8;
+  --piedra:    #b8a898;
+  --agua:      #6b9dad;
+  --aurora:    #c8a96e;
+  --blanco:    #fdfaf5;
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body:    'Lato', Arial, sans-serif;
@@ -79,6 +88,7 @@ const CONFIG = {
    RESET & BASE
    ═══════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
@@ -95,28 +105,78 @@ body {
   overflow-x: hidden;
 }
 
+/* ═══════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════ */
 .page {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 16px 140px; /* Margen inferior para que la barra fija no tape nada */
+  padding: 0 16px 120px;
 }
 
 /* ═══════════════════════════════════════
    HEADER
    ═══════════════════════════════════════ */
-.header { text-align: center; padding: 36px 0 28px; }
-.logo-mark { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 24px; opacity: 0.75; }
+.header {
+  text-align: center;
+  padding: 36px 0 28px;
+}
+
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  opacity: 0.75;
+}
+
 .logo-mark svg { width: 28px; height: 28px; }
-.logo-text { font-family: var(--font-display); font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--menta); }
-.headline { font-family: var(--font-display); font-size: clamp(26px, 5vw, 38px); font-weight: 700; line-height: 1.2; color: var(--blanco); margin-bottom: 14px; }
-.headline em { font-style: italic; color: var(--aurora); }
-.subheadline { font-size: clamp(15px, 2.5vw, 17px); color: var(--menta); max-width: 520px; margin: 0 auto 6px; font-weight: 400; }
-.divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--aurora), transparent); margin: 20px auto; }
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--menta);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 5vw, 38px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--blanco);
+  margin-bottom: 14px;
+}
+
+.headline em {
+  font-style: italic;
+  color: var(--aurora);
+}
+
+.subheadline {
+  font-size: clamp(15px, 2.5vw, 17px);
+  color: var(--menta);
+  max-width: 520px;
+  margin: 0 auto 6px;
+  font-weight: 400;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--aurora), transparent);
+  margin: 20px auto;
+}
 
 /* ═══════════════════════════════════════
    VIDEO SECTION
    ═══════════════════════════════════════ */
-.video-section { position: relative; margin-bottom: 28px; }
+.video-section {
+  position: relative;
+  margin-bottom: 28px;
+}
+
 .video-wrapper {
   position: relative;
   background: #000;
@@ -125,21 +185,30 @@ body {
   box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(168,200,154,0.15);
   aspect-ratio: 16/9;
 }
-#mainVideo { width: 100%; height: 100%; display: block; object-fit: cover; }
 
+#mainVideo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ── Overlay de play (antes de interacción) ── */
 .play-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(25,18,12,0.65);
+  background: rgba(25,18,12,0.55);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s;
   z-index: 10;
 }
+
 .play-overlay.hidden { opacity: 0; pointer-events: none; }
+
 .play-btn-circle {
   width: 72px;
   height: 72px;
@@ -151,16 +220,28 @@ body {
   margin-bottom: 14px;
   transition: transform 0.2s, background 0.2s;
 }
-.play-overlay:hover .play-btn-circle { transform: scale(1.08); background: var(--aurora); }
-.play-btn-circle svg { width: 28px; height: 28px; margin-left: 4px; }
-.play-overlay-text { font-family: var(--font-display); font-size: 16px; color: var(--crema); letter-spacing: 1px; }
 
+.play-overlay:hover .play-btn-circle {
+  transform: scale(1.08);
+  background: var(--aurora);
+}
+
+.play-btn-circle svg { width: 28px; height: 28px; margin-left: 4px; }
+
+.play-overlay-text {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--crema);
+  letter-spacing: 1px;
+}
+
+/* ── Hook flotante sobre el video ── */
 .hook-bubble {
   position: absolute;
   top: 16px;
   left: 50%;
   transform: translateX(-50%) translateY(-12px);
-  background: rgba(25,18,12,0.92);
+  background: rgba(25,18,12,0.88);
   border: 1px solid rgba(200,169,110,0.4);
   border-radius: 40px;
   padding: 8px 18px;
@@ -173,36 +254,64 @@ body {
   pointer-events: none;
   font-weight: 400;
 }
-.hook-bubble.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-.progress-bar-track { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; position: relative; }
-.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--salvia), var(--aurora)); border-radius: 3px; transition: width 0.3s linear; }
+.hook-bubble.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Barra de progreso falsa ── */
+.progress-bar-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--salvia), var(--aurora));
+  border-radius: 3px;
+  transition: width 0.8s ease-out;
+}
 
 /* ═══════════════════════════════════════
-   BODY COPY & FEATURES
+   BODY COPY (debajo del video)
    ═══════════════════════════════════════ */
-.body-copy { text-align: center; padding: 8px 0 24px; }
-.body-copy p { font-size: 15px; color: var(--piedra); max-width: 480px; margin: 0 auto; }
+.body-copy {
+  text-align: center;
+  padding: 8px 0 24px;
+}
+
+.body-copy p {
+  font-size: 15px;
+  color: var(--piedra);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
 .body-copy strong { color: var(--crema); font-weight: 700; }
 
-.features { margin: 32px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (max-width: 440px) { .features { grid-template-columns: 1fr; } }
-.feature-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 18px 16px; text-align: center; }
-.feature-icon { font-size: 28px; margin-bottom: 8px; }
-.feature-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--menta); margin-bottom: 6px; }
-.feature-desc { font-size: 13px; color: var(--piedra); line-height: 1.5; }
-
 /* ═══════════════════════════════════════
-   BOTÓN DE COMPRA PRINCIPAL (Revelado al tiempo X)
+   BOTÓN DE COMPRA PRINCIPAL (aparece al tiempo)
    ═══════════════════════════════════════ */
 .buy-section {
   text-align: center;
-  display: none; /* Evita interacciones accidentales antes de tiempo */
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  pointer-events: none;
 }
-.buy-section.visible { display: block; opacity: 1; transform: translateY(0); }
+
+.buy-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
 .buy-btn {
   display: inline-block;
   background: linear-gradient(135deg, var(--salvia) 0%, var(--musgo) 100%);
@@ -216,27 +325,109 @@ body {
   border: none;
   cursor: pointer;
   letter-spacing: 0.5px;
-  box-shadow: 0 8px 30px rgba(74,94,58,0.45);
+  box-shadow: 0 8px 30px rgba(74,94,58,0.45), 0 0 0 0 rgba(168,200,154,0.4);
   animation: pulse-glow 2.5s ease-in-out infinite;
   transition: transform 0.2s, box-shadow 0.2s;
   width: 100%;
   max-width: 480px;
   line-height: 1.3;
 }
-.buy-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 14px 40px rgba(74,94,58,0.55); }
+
+.buy-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 40px rgba(74,94,58,0.55);
+}
+
 .buy-btn:active { transform: scale(0.98); }
 
 @keyframes pulse-glow {
   0%,100% { box-shadow: 0 8px 30px rgba(74,94,58,0.45), 0 0 0 0 rgba(168,200,154,0.4); }
   50%      { box-shadow: 0 8px 30px rgba(74,94,58,0.45), 0 0 0 10px rgba(168,200,154,0); }
 }
-.buy-btn-sub { display: block; font-size: 12px; font-weight: 300; opacity: 0.8; margin-top: 4px; }
-.guarantee { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; font-size: 13px; color: var(--piedra); }
-.urgency-box { background: rgba(61,43,31,0.6); border: 1px solid rgba(200,169,110,0.2); border-radius: var(--radius-sm); padding: 12px 16px; margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--arena); }
-.countdown-display { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--aurora); font-weight: 700; letter-spacing: 1px; min-width: 80px; text-align: center; }
+
+.buy-btn-sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 300;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.guarantee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--piedra);
+}
+
+.guarantee svg { flex-shrink: 0; opacity: 0.7; }
+
+/* ── Urgency countdown ── */
+.urgency-box {
+  background: rgba(61,43,31,0.6);
+  border: 1px solid rgba(200,169,110,0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--arena);
+}
+
+.countdown-display {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--aurora);
+  font-weight: 700;
+  letter-spacing: 1px;
+  min-width: 80px;
+  text-align: center;
+}
 
 /* ═══════════════════════════════════════
-   STICKY BOTTOM BAR (Barra Fija Inteligente)
+   FEATURES / PROOF (opcional, siempre visible)
+   ═══════════════════════════════════════ */
+.features {
+  margin: 32px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 440px) { .features { grid-template-columns: 1fr; } }
+
+.feature-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.feature-icon { font-size: 28px; margin-bottom: 8px; }
+
+.feature-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--menta);
+  margin-bottom: 6px;
+}
+
+.feature-desc {
+  font-size: 13px;
+  color: var(--piedra);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════
+   STICKY BOTTOM BAR
    ═══════════════════════════════════════ */
 .sticky-bar {
   position: fixed;
@@ -244,12 +435,14 @@ body {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 12px 16px 20px;
-  background: linear-gradient(to top, rgba(25,18,12,1) 80%, rgba(25,18,12,0));
-  pointer-events: none; /* Permite clicks en el footer detrás de la barra */
+  padding: 12px 16px 14px;
+  background: rgba(25,18,12,0.96);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(168,200,154,0.15);
   display: flex;
   justify-content: center;
 }
+
 .sticky-btn {
   display: block;
   width: 100%;
@@ -267,27 +460,46 @@ body {
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
   letter-spacing: 0.3px;
-  pointer-events: auto; /* Reactiva interacciones solo sobre el botón */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
+
 .sticky-btn:hover { background: var(--musgo); }
-.sticky-btn.inactive { background: rgba(255,255,255,0.07); color: var(--piedra); cursor: default; pointer-events: none; box-shadow: none; }
+.sticky-btn:active { transform: scale(0.98); }
+.sticky-btn.inactive {
+  background: rgba(255,255,255,0.07);
+  color: var(--piedra);
+  cursor: default;
+  pointer-events: none;
+}
 
 /* ═══════════════════════════════════════
-   FOOTER
+   FOOTER MÍNIMO
    ═══════════════════════════════════════ */
-.mini-footer { text-align: center; padding: 24px 0 0; font-size: 12px; color: rgba(184,168,152,0.5); line-height: 1.6; }
+.mini-footer {
+  text-align: center;
+  padding: 12px 0 0;
+  font-size: 12px;
+  color: rgba(184,168,152,0.5);
+  line-height: 1.6;
+}
+
 .mini-footer a { color: inherit; }
 
 /* ═══════════════════════════════════════
-   ANIMATIONS & RESPONSIVE
+   ANIMATIONS
    ═══════════════════════════════════════ */
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .animate-in { animation: fadeInUp 0.7s ease both; }
 .delay-1 { animation-delay: 0.15s; }
 .delay-2 { animation-delay: 0.3s; }
 .delay-3 { animation-delay: 0.45s; }
 
+/* ═══════════════════════════════════════
+   MOBILE FINE-TUNING
+   ═══════════════════════════════════════ */
 @media (max-width: 480px) {
   .header { padding: 24px 0 20px; }
   .buy-btn { font-size: 16px; padding: 16px 24px; }
@@ -299,26 +511,49 @@ body {
 <body>
 <div class="page">
 
+  <!-- ═══ HEADER ═══ -->
   <header class="header animate-in">
     <div class="logo-mark">
+      <!-- Hoja SVG como logo -->
       <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M14 3 C14 3 22 9 22 17 C22 21.4 18.4 25 14 25 C9.6 25 6 21.4 6 17 C6 9 14 3 14 3Z" stroke="#a8c89a" stroke-width="1.5" fill="rgba(168,200,154,0.15)"/>
         <line x1="14" y1="25" x2="14" y2="10" stroke="#a8c89a" stroke-width="1" stroke-dasharray="2 2"/>
       </svg>
       <span class="logo-text">Método Esencia</span>
     </div>
-    <h1 class="headline">Libera tu <em>niño interior</em>,<br>vence la procrastinación<br>y vive con propósito</h1>
+
+    <h1 class="headline">
+      Libera tu <em>niño interior</em>,<br>
+      vence la procrastinación<br>
+      y vive con propósito
+    </h1>
+
     <div class="divider"></div>
-    <p class="subheadline delay-1 animate-in">Mira el video hasta el final — lo que descubrirás puede cambiar el rumbo de tu vida.</p>
+
+    <p class="subheadline delay-1 animate-in">
+      Mira el video hasta el final — lo que descubrirás puede cambiar el rumbo de tu vida.
+    </p>
   </header>
 
+  <!-- ═══ VIDEO ═══ -->
   <section class="video-section animate-in delay-2">
     <div class="video-wrapper">
-      <video id="mainVideo" playsinline preload="metadata" disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback">
+
+      <!-- Video nativo sin controles -->
+      <video
+        id="mainVideo"
+        playsinline
+        preload="metadata"
+        poster=""
+        disablePictureInPicture
+        controlsList="nodownload nofullscreen noremoteplayback"
+      >
+        <!-- Cambia el src por la URL de tu video -->
         <source src="video/vsl.mp4" type="video/mp4">
         Tu navegador no soporta video HTML5.
       </video>
 
+      <!-- Overlay de play (antes de que el usuario interactúe) -->
       <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Reproducir video">
         <div class="play-btn-circle">
           <svg viewBox="0 0 28 28" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -328,27 +563,51 @@ body {
         <span class="play-overlay-text">Ver ahora</span>
       </div>
 
+      <!-- Hook flotante -->
       <div class="hook-bubble" id="hookBubble" role="status" aria-live="polite"></div>
     </div>
 
+    <!-- Barra de progreso falsa -->
     <div class="progress-bar-track">
       <div class="progress-bar-fill" id="progressFill"></div>
     </div>
   </section>
 
+  <!-- ═══ COPY DEBAJO DEL VIDEO ═══ -->
   <div class="body-copy animate-in delay-3">
-    <p>En este video descubrirás el <strong>método de 3 pasos</strong> que ha ayudado a cientos de personas a sanar sus bloqueos internos, <strong>dejar de postergar</strong> y finalmente avanzar hacia la vida que siempre han querido.</p>
+    <p>
+      En este video descubrirás el <strong>método de 3 pasos</strong> que ha ayudado a cientos de personas a sanar sus bloqueos internos, <strong>dejar de postergar</strong> y finalmente avanzar hacia la vida que siempre han querido.
+    </p>
   </div>
 
+  <!-- ═══ FEATURES ═══ -->
   <div class="features animate-in delay-3">
-    <div class="feature-card"><div class="feature-icon">🌱</div><div class="feature-title">Niño Interior</div><div class="feature-desc">Sana las heridas del pasado que hoy te frenan sin que lo notes</div></div>
-    <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Fin a la Procrastinación</div><div class="feature-desc">Desbloquea tu energía y actúa aunque no "sientas ganas"</div></div>
-    <div class="feature-card"><div class="feature-icon">🌿</div><div class="feature-title">Metas con Sentido</div><div class="feature-desc">Define metas que nazcan de quién eres, no de lo que otros esperan</div></div>
-    <div class="feature-card"><div class="feature-icon">🤍</div><div class="feature-title">Paz Interior</div><div class="feature-desc">Vive desde un lugar de calma, claridad y autenticidad real</div></div>
+    <div class="feature-card">
+      <div class="feature-icon">🌱</div>
+      <div class="feature-title">Niño Interior</div>
+      <div class="feature-desc">Sana las heridas del pasado que hoy te frenan sin que lo notes</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Fin a la Procrastinación</div>
+      <div class="feature-desc">Desbloquea tu energía y actúa aunque no "sientas ganas"</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌿</div>
+      <div class="feature-title">Metas con Sentido</div>
+      <div class="feature-desc">Define metas que nazcan de quién eres, no de lo que otros esperan</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤍</div>
+      <div class="feature-title">Paz Interior</div>
+      <div class="feature-desc">Vive desde un lugar de calma, claridad y autenticidad real</div>
+    </div>
   </div>
 
+  <!-- ═══ BOTÓN DE COMPRA PRINCIPAL (oculto hasta X minutos) ═══ -->
   <div class="buy-section" id="buySection">
-    <a href="https://pay.hotmart.com/TU_LINK_AQUI" class="buy-btn" id="buyBtn" rel="noopener">
+
+    <a href="#" class="buy-btn" id="buyBtn" rel="noopener">
       🌿 Sí, quiero el Método Esencia — $67 USD
       <span class="buy-btn-sub">Acceso inmediato · Pago 100% seguro</span>
     </a>
@@ -361,27 +620,39 @@ body {
       Garantía de 7 días · Si no funciona, te devolvemos tu dinero
     </div>
 
+    <!-- Contador de urgencia -->
     <div class="urgency-box" id="urgencyBox">
       <span>⏳ Esta oferta vence en:</span>
       <span class="countdown-display" id="countdown">23:47:00</span>
     </div>
+
   </div>
 
-  <footer class="mini-footer">
-    <p>© 2026 Método Esencia · <a href="#">Privacidad</a> · <a href="#">Términos</a></p>
+  <!-- ═══ MINI FOOTER ═══ -->
+  <div class="mini-footer">
+    <p>© 2025 Método Esencia · <a href="#">Privacidad</a> · <a href="#">Términos</a></p>
     <p>Este sitio no es parte de Facebook™ ni de Meta Platforms Inc.</p>
-  </footer>
+  </div>
 
-</div>
+</div><!-- /page -->
 
+<!-- ═══ STICKY BAR ═══ -->
 <div class="sticky-bar">
-  <button class="sticky-btn inactive" id="stickyBtn">Sigue viendo el video...</button>
+  <button class="sticky-btn inactive" id="stickyBtn">
+    Sigue viendo el video...
+  </button>
 </div>
 
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.7/hls.min.js"></script>
 <script>
 (function() {
   "use strict";
 
+  // ── Elementos del DOM ──
   const video        = document.getElementById('mainVideo');
   const playOverlay  = document.getElementById('playOverlay');
   const hookBubble   = document.getElementById('hookBubble');
@@ -392,88 +663,148 @@ body {
   const urgencyBox   = document.getElementById('urgencyBox');
   const countdownEl  = document.getElementById('countdown');
 
-  // Inicializar configuraciones del Objeto CONFIG
-  video.src     = CONFIG.videoSrc;
+  // ── Aplicar configuración ──
   video.poster  = CONFIG.videoPoster;
   buyBtn.href   = CONFIG.hotmartUrl;
 
   if (!CONFIG.showUrgencyTimer) urgencyBox.style.display = 'none';
 
+  // ─────────────────────────────────────────
+  // HLS.JS — compatibilidad con todos los navegadores
+  // ─────────────────────────────────────────
+  function initHLS() {
+    if (Hls.isSupported()) {
+      const hls = new Hls({ startLevel: -1, autoStartLoad: true });
+      hls.loadSource(CONFIG.videoSrc);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // Safari nativo soporta HLS directamente
+      video.src = CONFIG.videoSrc;
+    } else {
+      console.warn('HLS no soportado en este navegador');
+    }
+  }
+
+  initHLS();
+
+  // ─────────────────────────────────────────
+  // AUTOPLAY (silencioso) + manejo del overlay
+  // ─────────────────────────────────────────
   let videoStarted = false;
 
-  // Forzar autoplay silencioso nativo
   function attemptAutoplay() {
     video.muted = true;
     video.play().then(() => {
       videoStarted = true;
       playOverlay.classList.add('hidden');
-    }).catch(() => { /* El navegador exige click interactivo */ });
+    }).catch(() => {
+      // Autoplay bloqueado → mostramos overlay para que el usuario haga clic
+    });
   }
+
+  // Intentar autoplay al cargar
   window.addEventListener('load', attemptAutoplay);
 
-  // Activar audio e iniciar video en click formal
+  // Clic en el overlay → activar con sonido
   function startVideoWithSound() {
-    video.muted = false;
-    video.play().then(() => {
-      videoStarted = true;
-    }).catch(() => {
-      video.muted = true;
-      video.play();
-      videoStarted = true;
-    });
+    if (!videoStarted) {
+      video.muted = false;
+      video.play().then(() => {
+        videoStarted = true;
+      }).catch(() => {
+        video.muted = true;
+        video.play();
+        videoStarted = true;
+      });
+    } else {
+      video.muted = false;
+    }
     playOverlay.classList.add('hidden');
   }
 
   playOverlay.addEventListener('click', startVideoWithSound);
   playOverlay.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') startVideoWithSound(); });
 
-  // Listener redundante por si interactúan scrolleando
+  // Activar sonido en cualquier interacción del usuario (scroll, toque)
   function activateSound() {
-    if (videoStarted && video.muted) { video.muted = false; }
+    if (videoStarted && video.muted) {
+      video.muted = false;
+    }
     document.removeEventListener('click', activateSound);
     document.removeEventListener('touchstart', activateSound);
+    document.removeEventListener('scroll', activateSound);
   }
-  document.addEventListener('click', activateSound);
+  document.addEventListener('click',      activateSound);
   document.addEventListener('touchstart', activateSound, { passive: true });
+  document.addEventListener('scroll',     activateSound, { passive: true });
 
-  // ── CONTROLES ANTI-TRAMPA (Bloqueos estrictos de navegación) ──
+  // ─────────────────────────────────────────
+  // BLOQUEAR CONTROLES (clic derecho / teclas)
+  // ─────────────────────────────────────────
   video.addEventListener('contextmenu', e => e.preventDefault());
 
+  document.addEventListener('keydown', e => {
+    const keys = [' ', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'k', 'j', 'l', 'f', 'm'];
+    if (keys.includes(e.key) && document.activeElement === video) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  });
+
+  // Si el usuario pausa el video, reanudarlo automáticamente
+  video.addEventListener('pause', () => {
+    if (videoStarted) {
+      setTimeout(() => {
+        if (video.paused && videoStarted) video.play().catch(() => {});
+      }, 300);
+    }
+  });
+
+  // Bloquear seeking (adelantar/retroceder)
   let lastTime = 0;
   video.addEventListener('timeupdate', () => {
-    // Si la diferencia de tiempo es mayor a 2s, el usuario intentó adelantar
+    // Solo bloquear si el salto es mayor a 2 segundos (para no interferir con la reproducción normal)
     if (Math.abs(video.currentTime - lastTime) > 2) {
       video.currentTime = lastTime;
     }
     lastTime = video.currentTime;
   });
 
-  // ── MANEJO DE BARRA DE PROGRESO SIMULADA ──
+  // ─────────────────────────────────────────
+  // BARRA DE PROGRESO FALSA
+  // ─────────────────────────────────────────
   function updateProgressBar(currentTime, duration) {
     if (!duration) return;
+
     let visualProgress;
 
     if (currentTime <= CONFIG.fastProgressUntil) {
+      // Fase rápida: avanza CONFIG.fastProgressFactor veces más rápido visualmente
       const fastEndPercent = (CONFIG.fastProgressUntil / duration) * CONFIG.fastProgressFactor;
-      const cappedFastEnd  = Math.min(fastEndPercent, 0.35); // Tope del 35% en la aceleración inicial
+      const cappedFastEnd  = Math.min(fastEndPercent, 0.35); // nunca pasa del 35% en la fase rápida
       visualProgress = (currentTime / CONFIG.fastProgressUntil) * cappedFastEnd;
     } else {
+      // Fase normal: distribuye el resto del progreso de forma lineal
       const fastEndPercent = Math.min((CONFIG.fastProgressUntil / duration) * CONFIG.fastProgressFactor, 0.35);
       const remaining      = 1 - fastEndPercent;
       const timeRemaining  = duration - CONFIG.fastProgressUntil;
       const elapsed        = currentTime - CONFIG.fastProgressUntil;
       visualProgress = fastEndPercent + (elapsed / timeRemaining) * remaining;
     }
+
     progressFill.style.width = (Math.min(visualProgress, 1) * 100).toFixed(2) + '%';
   }
 
-  // ── DESPLIEGUE DE HOOKS FLOTANTES ──
-  const shownHooks = new Set();
+  // ─────────────────────────────────────────
+  // HOOKS FLOTANTES
+  // ─────────────────────────────────────────
+  let hookIndex = 0;
   let hookTimeout = null;
+  const shownHooks = new Set();
 
   function checkHooks(currentTime) {
     CONFIG.hooks.forEach((hook, i) => {
-      if (!shownHooks.has(i) && currentTime >= hook.at && currentTime < hook.at + 1.5) {
+      if (!shownHooks.has(i) && currentTime >= hook.at && currentTime < hook.at + 2) {
         shownHooks.add(i);
         showHook(hook.text);
       }
@@ -484,27 +815,37 @@ body {
     clearTimeout(hookTimeout);
     hookBubble.textContent = text;
     hookBubble.classList.add('visible');
-    hookTimeout = setTimeout(() => { hookBubble.classList.remove('visible'); }, 4000);
+    hookTimeout = setTimeout(() => {
+      hookBubble.classList.remove('visible');
+    }, 4000);
   }
 
-  // ── REVELACIÓN DE OFERTA COMPRA ──
+  // ─────────────────────────────────────────
+  // BOTÓN DE COMPRA — aparece en X segundos
+  // ─────────────────────────────────────────
   let buyButtonShown = false;
+
   function checkBuyButton(currentTime) {
     if (!buyButtonShown && currentTime >= CONFIG.buyButtonAppearAt) {
       buyButtonShown = true;
       buySection.classList.add('visible');
+      buySection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
 
-  // ── ACTUALIZACIÓN DE BOTÓN INFERIOR DINÁMICO ──
+  // ─────────────────────────────────────────
+  // STICKY BTN — cambia texto según el video
+  // ─────────────────────────────────────────
   function updateStickyBtn(currentTime) {
     let currentStage = CONFIG.stickyButtonStages[0];
+
     for (const stage of CONFIG.stickyButtonStages) {
       if (currentTime >= stage.from) currentStage = stage;
     }
 
     stickyBtn.textContent = currentStage.text;
 
+    // Activar el botón cuando ya llega al momento de compra
     if (currentTime >= CONFIG.buyButtonAppearAt) {
       stickyBtn.classList.remove('inactive');
       stickyBtn.onclick = () => window.open(CONFIG.hotmartUrl, '_blank', 'noopener');
@@ -514,21 +855,31 @@ body {
     }
   }
 
-  // Escuchador unificado para rendimiento móvil
+  // ─────────────────────────────────────────
+  // LOOP PRINCIPAL (timeupdate)
+  // ─────────────────────────────────────────
   video.addEventListener('timeupdate', () => {
     const t = video.currentTime;
     const d = video.duration;
+
     updateProgressBar(t, d);
     checkHooks(t);
     checkBuyButton(t);
     updateStickyBtn(t);
   });
 
-  // ── TEMPORIZADOR DE URGENCIA PERSISTENTE (SessionStorage) ──
+  // ─────────────────────────────────────────
+  // CONTADOR DE URGENCIA
+  // ─────────────────────────────────────────
   if (CONFIG.showUrgencyTimer) {
+    // Guardar en sessionStorage para que no se reinicie al refrescar
     let endTime = parseInt(sessionStorage.getItem('esencia_timer_end') || '0');
+
     if (!endTime || endTime < Date.now()) {
-      endTime = Date.now() + (CONFIG.urgencyHours * 3600000) + (CONFIG.urgencyMinutes * 60000) + (CONFIG.urgencySeconds * 1000);
+      endTime = Date.now() +
+        CONFIG.urgencyHours   * 3600000 +
+        CONFIG.urgencyMinutes * 60000   +
+        CONFIG.urgencySeconds * 1000;
       sessionStorage.setItem('esencia_timer_end', endTime.toString());
     }
 
@@ -537,15 +888,23 @@ body {
       const h = Math.floor(diff / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
-      
-      countdownEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      countdownEl.textContent =
+        String(h).padStart(2,'0') + ':' +
+        String(m).padStart(2,'0') + ':' +
+        String(s).padStart(2,'0');
 
-      if (diff > 0) { setTimeout(updateCountdown, 1000); }
-      else { countdownEl.textContent = '00:00:00'; }
+      if (diff > 0) {
+        requestAnimationFrame(() => setTimeout(updateCountdown, 1000));
+      } else {
+        countdownEl.textContent = '00:00:00';
+      }
     }
+
     updateCountdown();
   }
+
 })();
 </script>
+
 </body>
 </html>
