@@ -12,7 +12,7 @@
 <script>
 const CONFIG = {
   videoSrc: "https://stream.mux.com/m5HozKavbfkyx01z02YAB5m8e02x02ft6pWKirY6zhtUBl4.m3u8",
-  hotmartUrl: "https://pay.hotmart.com/TU_LINK_AQUI",
+  hotmartUrl: "https://go.hotmart.com/M105831705B",
 
   // Porcentaje del video en que se desbloquea el botón (0.5 = 50%)
   unlockAtPercent: 0.5,
@@ -65,7 +65,7 @@ const CONFIG = {
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body:    'Lato', Arial, sans-serif;
-  --max-w: 620px;
+  --max-w: 780px;
   --radius: 14px;
 }
 
@@ -124,17 +124,26 @@ body {
 /* ══ HEADER MÍNIMO ══ */
 .header {
   text-align: center;
-  padding: 18px 0 14px;
+  padding: 16px 0 12px;
 }
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(20px, 4.8vw, 30px);
+  font-size: clamp(20px, 4.6vw, 30px);
   font-weight: 700;
   line-height: 1.15;
   color: var(--blanco);
   text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  margin-bottom: 8px;
 }
 .headline em { font-style: italic; color: var(--aurora); }
+.headline-sub {
+  font-size: clamp(13px, 2.3vw, 15px);
+  color: var(--menta);
+  max-width: 480px;
+  margin: 0 auto;
+  font-weight: 400;
+  line-height: 1.5;
+}
 
 /* ══ VIDEO ══ */
 .video-section { position: relative; }
@@ -490,8 +499,12 @@ body {
   <!-- TÍTULO CORTO -->
   <header class="header anim">
     <h1 class="headline">
-      Deja de vivir en <em>piloto automático</em>
+      Deja de vivir en <em>piloto automático</em><br>
+      y empieza a ser quien siempre quisiste ser
     </h1>
+    <p class="headline-sub">
+      Mira este video hasta el final — lo que descubrirás puede cambiar el rumbo de tu vida hoy mismo.
+    </p>
   </header>
 
   <!-- VIDEO -->
