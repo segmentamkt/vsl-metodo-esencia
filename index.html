@@ -95,20 +95,20 @@ body {
   padding: 0 14px 110px;
 }
 
-/* ══ CONTADOR SUPERIOR — elegante, no casino ══ */
+/* ══ CONTADOR SUPERIOR — rojo urgente ══ */
 .top-urgency {
-  background: linear-gradient(90deg, rgba(30,23,16,0.98), rgba(42,32,22,0.98));
-  border-bottom: 1px solid rgba(200,165,90,0.35);
+  background: linear-gradient(90deg, #a3302a, #c0392b, #a3302a);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
   padding: 10px 16px;
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 3px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--oro-suave);
+  color: #fff;
   position: sticky;
   top: 0;
   z-index: 50;
@@ -119,7 +119,10 @@ body {
   font-size: 19px;
   font-weight: 600;
   letter-spacing: 3px;
-  color: var(--oro);
+  color: #fff;
+  background: rgba(0,0,0,0.25);
+  padding: 1px 12px;
+  border-radius: 6px;
 }
 
 /* ══ HEADER ══ */
@@ -238,12 +241,21 @@ body {
 }
 .play-overlay:hover .play-circle { transform: scale(1.06); background: rgba(200,165,90,0.28); }
 .play-circle svg { width: 24px; height: 24px; margin-left: 4px; }
-.play-label {
+.play-label-strong {
   font-family: var(--font-display);
-  font-size: 15px;
-  font-style: italic;
-  color: var(--arena);
-  letter-spacing: 2px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--crema);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.play-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--oro-suave);
 }
 
 /* Aviso de sonido silenciado */
@@ -622,7 +634,7 @@ body {
 
 <!-- CONTADOR SUPERIOR -->
 <div class="top-urgency">
-  <span>Esta oferta vence en</span>
+  <span>⏳ Oferta válida solo por hoy — vence en</span>
   <span class="cd" id="topCountdown">23:47:00</span>
 </div>
 
@@ -651,11 +663,16 @@ body {
 
       <div class="tap-layer" id="tapLayer"></div>
 
-      <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Reproducir video">
+      <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Activar sonido del video">
         <div class="play-circle">
-          <svg viewBox="0 0 28 28" fill="#c8a55a"><polygon points="7,4 23,14 7,24"/></svg>
+          <svg viewBox="0 0 28 28" fill="none" stroke="#c8a55a" stroke-width="1.6">
+            <path d="M6 10 L6 18 L11 18 L17 23 L17 5 L11 10 Z" fill="#c8a55a" stroke="none"/>
+            <path d="M20 10 C22 12 22 16 20 18" stroke-linecap="round"/>
+            <path d="M22.5 7.5 C26 11 26 17 22.5 20.5" stroke-linecap="round"/>
+          </svg>
         </div>
-        <span class="play-label">Toca para ver</span>
+        <span class="play-label-strong">Tu video ya comenzó</span>
+        <span class="play-label">Toca para activar el sonido</span>
       </div>
 
       <!-- Aviso de sonido -->
@@ -672,7 +689,7 @@ body {
   <!-- BOTÓN CON CANDADO -->
   <div class="buy-section">
     <a href="#" class="buy-btn locked" id="buyBtn" rel="noopener">
-      <span id="buyBtnText">Se desbloquea mientras ves el video</span>
+      <span id="buyBtnText">🔒 Se desbloquea mientras ves el video</span>
       <span class="buy-btn-sub" id="buyBtnSub">Sigue viendo para desbloquear tu acceso</span>
     </a>
   </div>
@@ -830,18 +847,19 @@ body {
     }
   }
 
-  // ═══ AUTOPLAY (siempre inicia muted por política del navegador) ═══
+  // ═══ AUTOPLAY (muted, detrás del overlay — el overlay NO se oculta) ═══
   function attemptAutoplay() {
     video.muted = true;
     video.play().then(() => {
       videoStarted = true;
-      playOverlay.classList.add('hidden');
-      updateSoundHint();
-    }).catch(() => { /* overlay visible */ });
+      // El overlay sigue visible: "Tu video ya comenzó — toca para activar el sonido"
+    }).catch(() => { /* si falla, el overlay igual invita al toque */ });
   }
 
-  // Clic en overlay inicial → arranca CON sonido (es un gesto del usuario)
+  // Toque en el overlay → REINICIA desde 0 CON sonido (gesto del usuario)
   function startWithSound() {
+    video.currentTime = 0;
+    lastTime = 0;
     video.muted = false;
     video.play().then(() => {
       videoStarted = true;
@@ -903,6 +921,8 @@ body {
 
   function handleTap() {
     if (!videoStarted) return;
+    // Si el overlay inicial sigue visible, el toque lo maneja el overlay
+    if (!playOverlay.classList.contains('hidden')) return;
 
     // PRIORIDAD 1: si está en silencio, el primer tap activa el sonido (NO pausa)
     if (video.muted && !video.paused) {
@@ -960,6 +980,9 @@ body {
 
   // ═══ LOOP PRINCIPAL ═══
   video.addEventListener('timeupdate', () => {
+    // No contar progreso mientras el overlay inicial siga visible
+    if (!playOverlay.classList.contains('hidden')) return;
+
     const t = video.currentTime;
     const d = video.duration || 1;
 
