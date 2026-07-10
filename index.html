@@ -14,28 +14,26 @@ const CONFIG = {
   videoSrc: "https://stream.mux.com/m5HozKavbfkyx01z02YAB5m8e02x02ft6pWKirY6zhtUBl4.m3u8",
   hotmartUrl: "https://go.hotmart.com/M105831705B",
 
-  // Porcentaje del video en que se desbloquea el botón (0.5 = 50%)
-  unlockAtPercent: 0.5,
+  // ── DESBLOQUEO DEL BOTÓN ──
+  // Segundo exacto del video en que se desbloquea (285 = 04:45, anclaje de precio)
+  unlockAtSeconds: 285,
 
   // Máximo de veces que aparece el popup al pausar
   maxPausePopups: 3,
 
-  // Textos del botón fijo de abajo (pct = porcentaje del video 0 a 1)
+  // Textos del botón fijo de abajo (at = segundos del video)
+  // Sincronizados con el guion del VSL:
+  // 00:45 quiebre de creencias · 02:16 los 3 pilares · 03:19 entregables · 04:45 precio
   stickyButtonStages: [
-    { pct: 0,    text: "Sigue viendo — lo importante viene ahora" },
-    { pct: 0.2,  text: "Presta atención a lo que sigue" },
-    { pct: 0.4,  text: "Ya casi desbloqueas tu acceso" },
-    { pct: 0.5,  text: "Quiero el Método Esencia — $67 USD" },
+    { at: 0,   text: "Sigue viendo — lo importante viene ahora" },
+    { at: 45,  text: "El problema no es lo que haces..." },
+    { at: 136, text: "Los 3 pilares que lo cambian todo" },
+    { at: 199, text: "Mira todo lo que vas a recibir" },
+    { at: 285, text: "Quiero el Método Esencia — $67 USD" },
   ],
 
-  // Hooks flotantes (en segundos del video)
-  hooks: [
-    { at: 20,  text: "Lo que sigue te va a sorprender" },
-    { at: 60,  text: "Esto nadie te lo había explicado así" },
-    { at: 150, text: "Aquí está la raíz de todo" },
-    { at: 240, text: "Esta es la clave que lo cambia todo" },
-    { at: 320, text: "Tu momento de actuar está llegando" },
-  ],
+  // Hooks flotantes desactivados — el video ya trae sus propios subtítulos
+  hooks: [],
 
   // Contador de urgencia
   urgencyHours: 23,
@@ -788,7 +786,8 @@ body {
     <h2 class="popup-title">El video terminó.<br><span>Tu decisión empieza ahora.</span></h2>
     <p class="popup-body">
       Ya conoces el método. Lo único que falta es que <strong>des el primer paso</strong>.<br><br>
-      Acceso completo por solo <strong>$67 USD</strong> — precio válido únicamente hoy.
+      Una sola hora de mentoría con ella vale <strong>$97 USD</strong>.<br>
+      Hoy, el programa completo es tuyo por <strong>$67 USD</strong> — precio de lanzamiento, válido únicamente hoy.
     </p>
     <a href="#" class="popup-cta" id="endPopupBuy" rel="noopener">
       Quiero cambiar mi vida — $67 USD
@@ -1000,8 +999,8 @@ body {
     updateProgress(t, d);
     checkHooks(t);
 
-    if (!unlocked && d > 1 && (t / d) >= CONFIG.unlockAtPercent) unlockBtn();
-    updateStickyBtn(t / d);
+    if (!unlocked && t >= CONFIG.unlockAtSeconds) unlockBtn();
+    updateStickyBtn(t);
   });
 
   function unlockBtn() {
@@ -1036,9 +1035,9 @@ body {
     });
   }
 
-  function updateStickyBtn(pct) {
+  function updateStickyBtn(t) {
     let stage = CONFIG.stickyButtonStages[0];
-    for (const s of CONFIG.stickyButtonStages) if (pct >= s.pct) stage = s;
+    for (const s of CONFIG.stickyButtonStages) if (t >= s.at) stage = s;
     stickyBtn.textContent = stage.text;
     if (unlocked) {
       stickyBtn.className = 'sticky-btn active';
