@@ -32,8 +32,14 @@ const CONFIG = {
     { at: 285, text: "Quiero el Método Esencia — $67 USD" },
   ],
 
-  // Hooks flotantes desactivados — el video ya trae sus propios subtítulos
-  hooks: [],
+  // Hooks flotantes en momentos clave del VSL
+  // 00:45 quiebre de creencias · 02:16 pilares · 03:42 mentoría · 04:45 precio
+  hooks: [
+    { at: 45,  text: "Presta atención a lo que sigue" },
+    { at: 136, text: "Los 3 pilares que lo cambian todo" },
+    { at: 222, text: "Esto es lo que hace diferente al método" },
+    { at: 285, text: "Tu acceso acaba de desbloquearse" },
+  ],
 
   // Contador de urgencia
   urgencyHours: 23,
@@ -41,8 +47,10 @@ const CONFIG = {
   urgencySeconds: 0,
 
   // Barra de progreso falsa
+  // En los primeros "fastProgressUntil" segundos, la barra llega a "fastProgressTarget"
+  // (30 segundos → 40% de la barra). El resto avanza lineal hasta el final.
   fastProgressUntil: 30,
-  fastProgressFactor: 2.5,
+  fastProgressTarget: 0.4,
 };
 </script>
 
@@ -786,7 +794,7 @@ body {
     <h2 class="popup-title">El video terminó.<br><span>Tu decisión empieza ahora.</span></h2>
     <p class="popup-body">
       Ya conoces el método. Lo único que falta es que <strong>des el primer paso</strong>.<br><br>
-      Una sola hora de mentoría con ella vale <strong>$97 USD</strong>.<br>
+      Una sola hora de mentoría conmigo vale <strong>$97 USD</strong>.<br>
       Hoy, el programa completo es tuyo por <strong>$67 USD</strong> — precio de lanzamiento, válido únicamente hoy.
     </p>
     <a href="#" class="popup-cta" id="endPopupBuy" rel="noopener">
@@ -1015,9 +1023,9 @@ body {
   function updateProgress(t, d) {
     let pct;
     const fast = CONFIG.fastProgressUntil;
-    const fastEnd = Math.min((fast / d) * CONFIG.fastProgressFactor, 0.3);
-    if (t <= fast) pct = (t / fast) * fastEnd;
-    else pct = fastEnd + ((t - fast) / (d - fast)) * (1 - fastEnd);
+    const target = CONFIG.fastProgressTarget; // 0.4 = la barra llega al 40% en los primeros segundos
+    if (t <= fast) pct = (t / fast) * target;
+    else pct = target + ((t - fast) / (d - fast)) * (1 - target);
     progressFill.style.width = (Math.min(pct, 1) * 100).toFixed(2) + '%';
   }
 
