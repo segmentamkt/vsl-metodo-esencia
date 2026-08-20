@@ -12,7 +12,7 @@
 <script>
 const CONFIG = {
   videoSrc: "https://stream.mux.com/BIg6B22EGHE1nPQTgFZwW3KMhgNXSaOeGTRvA01jDUME.m3u8",
-  hotmartUrl: "https://pay.hotmart.com/M105831705B?sck=HOTMART_PRODUCT_PAGE&off=2xiswanf&hotfeature=32&_gl=1*4dohyr*_gcl_aw*R0NMLjE3ODMwMDc3OTcuQ2p3S0NBandtSmpTQmhCLUVpd0FrWmd4aTBSZHVzWnduWlltMXF4UHQ3dnBIRnd2eHNBZENlVUttYzJQZTZ5QTk3elVUcTItU2tPa1BSb0NCelVRQXZEX0J3RQ..*_gcl_au*MTk3MDcxODkzMS4xNzgyMTM5NDU3*FPAU*MTk3MDcxODkzMS4xNzgyMTM5NDU3*_ga*MTc0ODY2MTE2NC4xNzgyMTM5NDU3*_ga_GQH2V1F11Q*czE3ODQyNDIyNzckbzYkZzEkdDE3ODQyNDY2NzQkajM1JGwwJGgxMTIyODU5NDA1&bid=1784246889291",
+  hotmartUrl: "https://go.hotmart.com/M105831705B",
 
   // ── DESBLOQUEO DEL BOTÓN ──
   // Segundo exacto del video en que se desbloquea (285 = 04:45, anclaje de precio)
@@ -58,17 +58,17 @@ const CONFIG = {
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
 
 :root {
-  --fondo:    #1e1710;
-  --tierra:   #2a2016;
-  --oliva:    #4a4a32;
-  --salvia:   #6b7a52;
-  --menta:    #9aad84;
-  --crema:    #f2ead8;
-  --arena:    #e0d4b8;
-  --piedra:   #a89880;
-  --oro:      #c8a55a;
-  --oro-suave:#d9bd85;
-  --blanco:   #fdfaf2;
+  --fondo:    #1a201a;
+  --tierra:   #26302582;
+  --oliva:    #4a5842;
+  --salvia:   #7a9068;
+  --menta:    #a6bf96;
+  --crema:    #f0ecdf;
+  --arena:    #ddd2ba;
+  --piedra:   #a8a088;
+  --oro:      #b3a06a;
+  --oro-suave:#c9bd95;
+  --blanco:   #fbf9f2;
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'Jost', 'Lato', Arial, sans-serif;
@@ -88,9 +88,9 @@ body {
   overflow-x: hidden;
   background-color: var(--fondo);
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(107,122,82,0.3) 0%, transparent 60%),
-    radial-gradient(ellipse 120% 100% at 50% 100%, rgba(15,10,6,0.75) 0%, transparent 60%),
-    url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='30' cy='40' rx='18' ry='28' fill='none' stroke='rgba(107,122,82,0.10)' stroke-width='1.2' transform='rotate(-30 30 40)'/%3E%3Cellipse cx='160' cy='80' rx='14' ry='22' fill='none' stroke='rgba(107,122,82,0.08)' stroke-width='1' transform='rotate(20 160 80)'/%3E%3Cellipse cx='80' cy='160' rx='20' ry='30' fill='none' stroke='rgba(107,122,82,0.07)' stroke-width='1' transform='rotate(-15 80 160)'/%3E%3Cellipse cx='140' cy='170' rx='12' ry='18' fill='none' stroke='rgba(107,122,82,0.08)' stroke-width='1' transform='rotate(40 140 170)'/%3E%3C/svg%3E");
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(122,144,104,0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 120% 100% at 50% 100%, rgba(14,20,14,0.7) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='30' cy='40' rx='18' ry='28' fill='none' stroke='rgba(122,144,104,0.10)' stroke-width='1.2' transform='rotate(-30 30 40)'/%3E%3Cellipse cx='160' cy='80' rx='14' ry='22' fill='none' stroke='rgba(122,144,104,0.08)' stroke-width='1' transform='rotate(20 160 80)'/%3E%3Cellipse cx='80' cy='160' rx='20' ry='30' fill='none' stroke='rgba(122,144,104,0.07)' stroke-width='1' transform='rotate(-15 80 160)'/%3E%3Cellipse cx='140' cy='170' rx='12' ry='18' fill='none' stroke='rgba(122,144,104,0.08)' stroke-width='1' transform='rotate(40 140 170)'/%3E%3C/svg%3E");
   background-size: auto, auto, 200px 200px;
   background-attachment: fixed;
 }
@@ -287,8 +287,8 @@ body {
 }
 .sound-hint.show { display: block; }
 @keyframes hint-pulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(200,165,90,0.35); }
-  50%      { box-shadow: 0 0 0 8px rgba(200,165,90,0); }
+  0%,100% { box-shadow: 0 0 0 0 rgba(122,144,104,0.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(122,144,104,0); }
 }
 
 .hook-bubble {
@@ -354,16 +354,16 @@ body {
   color: rgba(168,152,128,0.6);
   cursor: not-allowed;
   pointer-events: none;
-  border: 1px dashed rgba(200,165,90,0.3);
+  border: 1px dashed rgba(122,144,104,0.35);
 }
 
 .buy-btn.unlocked {
-  background: linear-gradient(135deg, #b8954a 0%, #96742f 100%);
-  color: #1e1710;
+  background: linear-gradient(135deg, #7a9068 0%, #566b48 100%);
+  color: #fbf9f2;
   cursor: pointer;
   pointer-events: auto;
   border: none;
-  box-shadow: 0 8px 30px rgba(200,165,90,0.35), 0 0 0 1px rgba(200,165,90,0.4);
+  box-shadow: 0 8px 30px rgba(122,144,104,0.4), 0 0 0 1px rgba(122,144,104,0.45);
   animation: pulse-buy 2.8s ease-in-out infinite;
 }
 .buy-btn.unlocked:hover { transform: translateY(-2px) scale(1.01); }
@@ -379,8 +379,8 @@ body {
 }
 
 @keyframes pulse-buy {
-  0%,100% { box-shadow: 0 8px 30px rgba(200,165,90,0.35), 0 0 0 1px rgba(200,165,90,0.4); }
-  50%      { box-shadow: 0 8px 30px rgba(200,165,90,0.35), 0 0 0 9px rgba(200,165,90,0); }
+  0%,100% { box-shadow: 0 8px 30px rgba(122,144,104,0.4), 0 0 0 1px rgba(122,144,104,0.45); }
+  50%      { box-shadow: 0 8px 30px rgba(122,144,104,0.4), 0 0 0 9px rgba(122,144,104,0); }
 }
 @keyframes unlock-pop {
   0%{transform:scale(1);} 40%{transform:scale(1.05);} 100%{transform:scale(1);}
@@ -389,6 +389,36 @@ body {
 
 /* ══ SECCIÓN INFERIOR ══ */
 .below-fold { margin-top: 52px; }
+
+/* ¿Es para ti? */
+.for-you { margin-bottom: 56px; }
+.for-you-list {
+  list-style: none;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0;
+}
+.for-you-list li {
+  position: relative;
+  padding: 12px 0 12px 34px;
+  font-size: 15px;
+  color: var(--arena);
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(122,144,104,0.12);
+}
+.for-you-list li:last-child { border-bottom: none; }
+.for-you-list li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23a6bf96' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5 L6.5 12 L13 4'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
 .section-title {
   font-family: var(--font-display);
@@ -516,11 +546,11 @@ body {
   pointer-events: none;
 }
 .sticky-btn.active {
-  background: linear-gradient(135deg, #b8954a, #96742f);
-  color: #1e1710;
+  background: linear-gradient(135deg, #7a9068, #566b48);
+  color: #fbf9f2;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(200,165,90,0.3);
+  box-shadow: 0 4px 20px rgba(122,144,104,0.35);
 }
 
 /* ══ POPUPS ══ */
@@ -542,7 +572,7 @@ body {
 
 .popup-box {
   background: linear-gradient(165deg, #2a2016, #1a1208);
-  border: 1px solid rgba(200,165,90,0.4);
+  border: 1px solid rgba(122,144,104,0.45);
   border-radius: 18px;
   padding: 38px 28px 28px;
   max-width: 390px;
@@ -593,8 +623,8 @@ body {
 
 .popup-cta {
   display: block;
-  background: linear-gradient(135deg, #b8954a, #96742f);
-  color: #1e1710;
+  background: linear-gradient(135deg, #7a9068, #566b48);
+  color: #fbf9f2;
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
@@ -671,8 +701,8 @@ body {
 
       <div class="play-overlay" id="playOverlay" role="button" tabindex="0" aria-label="Activar sonido del video">
         <div class="play-circle">
-          <svg viewBox="0 0 28 28" fill="none" stroke="#c8a55a" stroke-width="1.6">
-            <path d="M6 10 L6 18 L11 18 L17 23 L17 5 L11 10 Z" fill="#c8a55a" stroke="none"/>
+          <svg viewBox="0 0 28 28" fill="none" stroke="#a6bf96" stroke-width="1.6">
+            <path d="M6 10 L6 18 L11 18 L17 23 L17 5 L11 10 Z" fill="#a6bf96" stroke="none"/>
             <path d="M20 10 C22 12 22 16 20 18" stroke-linecap="round"/>
             <path d="M22.5 7.5 C26 11 26 17 22.5 20.5" stroke-linecap="round"/>
           </svg>
@@ -702,13 +732,27 @@ body {
 
   <!-- CONTENIDO INFERIOR -->
   <div class="below-fold">
+
+    <!-- ¿Es para ti? -->
+    <div class="for-you">
+      <h2 class="section-title">¿Este método es para ti?</h2>
+      <p class="section-sub">Si te identificas con esto, estás en el lugar correcto.</p>
+      <ul class="for-you-list">
+        <li>Sabes lo que quieres, pero no sabes por dónde empezar.</li>
+        <li>Tienes planes, ideas y sueños, pero los postergas una y otra vez.</li>
+        <li>Tomas cursos y haces networking, pero algo dentro de ti te frena.</li>
+        <li>Sientes que no es pereza ni falta de disciplina — es algo más profundo.</li>
+        <li>Estás listo para reconectar contigo y por fin tomar acción.</li>
+      </ul>
+    </div>
+
     <h2 class="section-title">Lo que vas a transformar</h2>
     <p class="section-sub">Vuelve a ti. Reconecta tu esencia. Transforma tu vida.</p>
 
     <div class="features">
       <div class="feature-card">
         <div class="feature-icon">
-          <svg viewBox="0 0 34 34" fill="none" stroke="#c8a55a" stroke-width="1.3">
+          <svg viewBox="0 0 34 34" fill="none" stroke="#a6bf96" stroke-width="1.3">
             <circle cx="17" cy="12" r="5"/>
             <path d="M8 27 C8 21 12 19 17 19 C22 19 26 21 26 27"/>
             <path d="M14.5 13.5 C15.5 15 18.5 15 19.5 13.5" stroke-linecap="round"/>
@@ -719,7 +763,7 @@ body {
       </div>
       <div class="feature-card">
         <div class="feature-icon">
-          <svg viewBox="0 0 34 34" fill="none" stroke="#c8a55a" stroke-width="1.3">
+          <svg viewBox="0 0 34 34" fill="none" stroke="#a6bf96" stroke-width="1.3">
             <path d="M17 26 C17 26 8 20 8 13.5 C8 10 10.5 8 13 8 C15 8 16.5 9.5 17 10.5 C17.5 9.5 19 8 21 8 C23.5 8 26 10 26 13.5 C26 20 17 26 17 26Z"/>
           </svg>
         </div>
@@ -728,7 +772,7 @@ body {
       </div>
       <div class="feature-card">
         <div class="feature-icon">
-          <svg viewBox="0 0 34 34" fill="none" stroke="#c8a55a" stroke-width="1.3">
+          <svg viewBox="0 0 34 34" fill="none" stroke="#a6bf96" stroke-width="1.3">
             <circle cx="17" cy="17" r="5"/>
             <line x1="17" y1="5" x2="17" y2="9" stroke-linecap="round"/>
             <line x1="17" y1="25" x2="17" y2="29" stroke-linecap="round"/>
@@ -745,7 +789,7 @@ body {
       </div>
       <div class="feature-card">
         <div class="feature-icon">
-          <svg viewBox="0 0 34 34" fill="none" stroke="#c8a55a" stroke-width="1.3">
+          <svg viewBox="0 0 34 34" fill="none" stroke="#a6bf96" stroke-width="1.3">
             <path d="M17 28 L7 17 L11 8 L17 12 L23 8 L27 17 Z" stroke-linejoin="round"/>
             <path d="M17 12 L17 28" />
           </svg>
