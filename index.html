@@ -7,6 +7,29 @@
 <meta name="description" content="Vuelve a ti. Reconecta tu esencia. Transforma tu vida.">
 
 <!-- ═══════════════════════════════════════════
+     META PIXEL — La Mona Exploradora
+     Dispara PageView automáticamente al cargar.
+     ViewContent e InitiateCheckout se disparan
+     más abajo, en el bloque de JavaScript.
+     ═══════════════════════════════════════════ -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1618399809130463');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1618399809130463&ev=PageView&noscript=1"
+/></noscript>
+<!-- Fin Meta Pixel -->
+
+<!-- ═══════════════════════════════════════════
      CONFIGURACIÓN — Edita solo esta sección
      ═══════════════════════════════════════════ -->
 <script>
@@ -842,7 +865,7 @@ body {
       Hoy, el programa completo es tuyo por <strong>$67 USD</strong> — precio de lanzamiento, válido únicamente hoy.
     </p>
     <a href="#" class="popup-cta" id="endPopupBuy" rel="noopener">
-      Quiero cambiar mi vida — $67 USD
+      Sí, quiero reconectar conmigo — $67 USD
     </a>
     <button class="popup-skip" id="endPopupClose">Ver la página de nuevo</button>
   </div>
@@ -875,11 +898,38 @@ body {
   const endPopupClose= document.getElementById('endPopupClose');
 
   endPopupBuy.href = CONFIG.hotmartUrl;
+  endPopupBuy.addEventListener('click', function (e) {
+    e.preventDefault();
+    goToHotmart(false);
+  });
+
+  // ═══ META PIXEL — InitiateCheckout ═══
+  // Se dispara SIEMPRE que el usuario haga clic en cualquiera de los
+  // 3 botones que llevan a Hotmart, justo antes de salir de esta página.
+  // El setTimeout da tiempo a que la petición del pixel salga antes
+  // de que el navegador cambie de página.
+  function goToHotmart(openInNewTab) {
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', {
+        content_name: 'Método Esencia',
+        currency: 'USD',
+        value: 67
+      });
+    }
+    setTimeout(function () {
+      if (openInNewTab) {
+        window.open(CONFIG.hotmartUrl, '_blank', 'noopener');
+      } else {
+        window.location.href = CONFIG.hotmartUrl;
+      }
+    }, 200);
+  }
 
   let videoStarted    = false;
   let userPaused      = false;
   let pausePopupCount = 0;
   let unlocked        = false;
+  let viewContentSent = false;
   let lastTime        = 0;
   let blockSeek       = false;
 
@@ -909,6 +959,15 @@ body {
 
   // Toque en el overlay → REINICIA desde 0 CON sonido (gesto del usuario)
   function startWithSound() {
+    if (!viewContentSent && typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', {
+        content_name: 'Método Esencia',
+        content_type: 'product',
+        currency: 'USD',
+        value: 67
+      });
+      viewContentSent = true;
+    }
     video.currentTime = 0;
     lastTime = 0;
     video.muted = false;
@@ -1060,6 +1119,10 @@ body {
     buyBtn.classList.remove('locked');
     buyBtn.classList.add('unlocked', 'just-unlocked');
     buyBtn.href = CONFIG.hotmartUrl;
+    buyBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      goToHotmart(false);
+    });
     buyBtnText.textContent = 'Sí, quiero el Método Esencia — $67 USD';
     buyBtnSub.textContent = 'Acceso inmediato · Pago 100% seguro';
   }
@@ -1093,7 +1156,7 @@ body {
     stickyBtn.textContent = stage.text;
     if (unlocked) {
       stickyBtn.className = 'sticky-btn active';
-      stickyBtn.onclick = () => window.open(CONFIG.hotmartUrl, '_blank', 'noopener');
+      stickyBtn.onclick = () => goToHotmart(true);
     } else {
       stickyBtn.className = 'sticky-btn inactive';
       stickyBtn.onclick = null;
